@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختيار الوان النقشات</title>
+    <style>
+        /* CSS هنا */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --success-color: #27ae60;
+            --warning-color: #e67e22;
+            --danger-color: #e74c3c;
+            --neutral-color: #bdc3c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--primary-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background-color: var(--secondary-color);
+            padding: 15px;
+            border-radius: 5px;
+            flex: 1;
+            margin: 0 10px;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .stat-box h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .stat-box .count {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Designs Grid Styles */
+        .designs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        .design-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            height: 200px;
+            display: flex;
+        }
+
+        .design-info {
+            width: 50%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .design-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .design-button {
+            padding: 8px 12px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .design-button:hover {
+            background-color: #2980b9;
+        }
+
+        .design-button.edit {
+            background-color: var(--warning-color);
+        }
+
+        .design-button.edit:hover {
+            background-color: #d35400;
+        }
+
+        .design-image {
+            width: 50%;
+            background-color: var(--neutral-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .design-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Color Selection Modal */
+        .color-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 460px;
+            max-width: 95%;
+            margin: 20px auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .color-selection-container {
+            display: flex;
+            height: 600px;
+        }
+
+        .color-versions {
+            width: 320px;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .version-container {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid var(--neutral-color);
+            border-radius: 5px;
+        }
+
+        .version-header {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .color-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .color-button {
+            padding: 5px 8px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            flex: 1;
+            margin: 0 3px;
+        }
+
+        .color-display {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .color-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .color-code {
+            font-size: 0.8rem;
+            font-family: monospace;
+        }
+
+        .design-preview {
+            width: 120px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preview-header {
+            width: 100%;
+            height: 200px;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .preview-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .preview-status {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .status-not-selected {
+            background-color: var(--danger-color);
+        }
+
+        .status-selected {
+            background-color: var(--warning-color);
+        }
+
+        .status-sent {
+            background-color: var(--success-color);
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 400px;
+            background-color: var(--neutral-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-actions {
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .action-button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .confirm-btn {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background-color: #219653;
+        }
+
+        .save-btn {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .save-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .reset-btn {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background-color: #d35400;
+        }
+
+        .back-btn {
+            background-color: var(--neutral-color);
+            color: var(--primary-color);
+        }
+
+        .back-btn:hover {
+            background-color: #a6acaf;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .designs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .design-container {
+                height: 180px;
+            }
+            
+            .color-selection-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .color-versions {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .design-preview {
+                width: 100%;
+                flex-direction: row;
+                height: 150px;
+            }
+            
+            .preview-header {
+                width: 50%;
+                height: 100%;
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+            
+            .preview-image {
+                width: 50%;
+                height: 100%;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .welcome-message {
+                font-size: 1rem;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+            }
+            
+            .stat-box {
+                margin: 5px 0;
+            }
+            
+            .design-container {
+                height: 160px;
+            }
+            
+            .design-info {
+                padding: 10px;
+            }
+            
+            .design-number {
+                font-size: 1.3rem;
+            }
+            
+            .design-button {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+            
+            .color-selection-container {
+                flex-direction: column;
+            }
+            
+            .color-versions {
+                width: 100%;
+                height: 350px;
+            }
+            
+            .design-preview {
+                width: 100%;
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .preview-header {
+                width: 100%;
+                height: 120px;
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            
+            .preview-image {
+                width: 100%;
+                height: 200px;
+            }
+            
+            .action-button {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .designs-grid {
+                gap: 10px;
+            }
+            
+            .design-container {
+                height: 150px;
+            }
+            
+            .design-number {
+                font-size: 1.2rem;
+            }
+            
+            .design-button {
+                font-size: 0.75rem;
+                padding: 5px 8px;
+            }
+            
+            .color-buttons {
+                flex-direction: column;
+            }
+            
+            .color-button {
+                margin: 2px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>اختيار الوان النقشات</h1>
+            <p class="welcome-message">في هذا الموقع ستقوم عزيزي المدير "ياسر البحري" باختيار الوان النقشات عبر لوحة مستقلة لكل نقشة</p>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <h3>التصاميم الجاهزة بدون الوان</h3>
+                    <div class="count" id="ready-count">5</div>
+                </div>
+                <div class="stat-box">
+                    <h3>التصاميم الجاهزة كلياً</h3>
+                    <div class="count" id="completed-count">2</div>
+                </div>
+            </div>
+            
+            <a href="pics-board.html" class="nav-button">الذهاب الى صفحة التصاميم الجاهزة</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="designs-grid" id="designs-grid">
+            <!-- Design containers will be generated by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Color Selection Modal -->
+    <div class="color-modal" id="color-modal">
+        <div class="modal-content">
+            <div class="modal-header">اختيار الوان التصميم</div>
+            
+            <div class="color-selection-container">
+                <div class="color-versions" id="color-versions">
+                    <!-- Version containers will be generated by JavaScript -->
+                </div>
+                
+                <div class="design-preview">
+                    <div class="preview-header">
+                        <div class="preview-number" id="preview-number">1</div>
+                        <div class="preview-status status-not-selected" id="preview-status">لم يتم الاختيار</div>
+                    </div>
+                    <div class="preview-image">
+                        <img src="" alt="تصميم" id="preview-image">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="action-button confirm-btn" id="confirm-btn">تأكيد الالوان</button>
+                <button class="action-button save-btn" id="save-btn">حفظ مؤقت</button>
+                <button class="action-button reset-btn" id="reset-btn">تصفير الخانات</button>
+                <button class="action-button back-btn" id="back-btn">عودة الى صفحة النقشات</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript هنا
+        document.addEventListener('DOMContentLoaded', function() {
+            // بيانات التصاميم
+            const designsData = [];
+            for (let i = 1; i <= 60; i++) {
+                designsData.push({
+                    id: i,
+                    name: `تصميم ${i}`,
+                    image: i <= 5 ? `img/${i}.jpg` : '', // فقط أول 5 تصميمات لها صور
+                    colors: {
+                        a: { background: '', pattern: '', edges: '' },
+                        b: { background: '', pattern: '', edges: '' },
+                        c: { background: '', pattern: '', edges: '' },
+                        d: { background: '', pattern: '', edges: '' },
+                        e: { background: '', pattern: '', edges: '' },
+                        f: { background: '', pattern: '', edges: '' },
+                        g: { background: '', pattern: '', edges: '' },
+                        h: { background: '', pattern: '', edges: '' },
+                        i: { background: '', pattern: '', edges: '' },
+                        j: { background: '', pattern: '', edges: '' }
+                    },
+                    status: 'not-selected' // not-selected, selected, sent
+                });
+            }
+
+            // تحميل البيانات المحفوظة من localStorage
+            const savedData = localStorage.getItem('designsData');
+            if (savedData) {
+                const parsedData = JSON.parse(savedData);
+                parsedData.forEach((design, index) => {
+                    if (index < designsData.length) {
+                        designsData[index].colors = design.colors;
+                        designsData[index].status = design.status;
+                    }
+                });
+            }
+
+            // العناصر الأساسية في DOM
+            const designsGrid = document.getElementById('designs-grid');
+            const colorModal = document.getElementById('color-modal');
+            const colorVersions = document.getElementById('color-versions');
+            const previewNumber = document.getElementById('preview-number');
+            const previewStatus = document.getElementById('preview-status');
+            const previewImage = document.getElementById('preview-image');
+            const confirmBtn = document.getElementById('confirm-btn');
+            const saveBtn = document.getElementById('save-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const backBtn = document.getElementById('back-btn');
+
+            let currentDesignId = null;
+
+            // إنشاء شبكة التصاميم
+            function renderDesignsGrid() {
+                designsGrid.innerHTML = '';
+                
+                designsData.forEach(design => {
+                    const designContainer = document.createElement('div');
+                    designContainer.className = 'design-container';
+                    
+                    const designInfo = document.createElement('div');
+                    designInfo.className = 'design-info';
+                    
+                    const designNumber = document.createElement('div');
+                    designNumber.className = 'design-number';
+                    designNumber.textContent = design.id;
+                    
+                    const designButton = document.createElement('button');
+                    designButton.className = 'design-button';
+                    designButton.textContent = design.status === 'not-selected' ? 
+                        'قم باختيار الالوان لهذه النقشة' : 'تعديل الوان هذه النقشة';
+                    
+                    if (design.status !== 'not-selected') {
+                        designButton.classList.add('edit');
+                    }
+                    
+                    designButton.addEventListener('click', () => {
+                        openColorModal(design.id);
+                    });
+                    
+                    designInfo.appendChild(designNumber);
+                    designInfo.appendChild(designButton);
+                    
+                    const designImage = document.createElement('div');
+                    designImage.className = 'design-image';
+                    
+                    if (design.image) {
+                        const img = document.createElement('img');
+                        img.src = design.image;
+                        img.alt = design.name;
+                        designImage.appendChild(img);
+                    } else {
+                        designImage.textContent = 'لم يتم الانتهاء من التصميم بعد';
+                    }
+                    
+                    designContainer.appendChild(designInfo);
+                    designContainer.appendChild(designImage);
+                    
+                    designsGrid.appendChild(designContainer);
+                });
+                
+                updateStats();
+            }
+
+            // فتح نافذة اختيار الألوان
+            function openColorModal(designId) {
+                currentDesignId = designId;
+                const design = designsData[designId - 1];
+                
+                previewNumber.textContent = design.id;
+                previewImage.src = design.image;
+                
+                // تحديث حالة التصميم
+                updateDesignStatus(design);
+                
+                // إنشاء إصدارات الألوان
+                renderColorVersions(design);
+                
+                colorModal.style.display = 'block';
+            }
+
+            // تحديث حالة التصميم
+            function updateDesignStatus(design) {
+                previewStatus.textContent = 
+                    design.status === 'not-selected' ? 'لم يتم الاختيار' :
+                    design.status === 'selected' ? 'تم الاختيار' : 'تم الارسال';
+                
+                previewStatus.className = 'preview-status ' + 
+                    (design.status === 'not-selected' ? 'status-not-selected' :
+                     design.status === 'selected' ? 'status-selected' : 'status-sent');
+            }
+
+            // إنشاء إصدارات الألوان
+            function renderColorVersions(design) {
+                colorVersions.innerHTML = '';
+                
+                const versions = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+                
+                versions.forEach(version => {
+                    const versionContainer = document.createElement('div');
+                    versionContainer.className = 'version-container';
+                    
+                    const versionHeader = document.createElement('div');
+                    versionHeader.className = 'version-header';
+                    versionHeader.textContent = `الاصدار ${version}`;
+                    
+                    const colorButtons = document.createElement('div');
+                    colorButtons.className = 'color-buttons';
+                    
+                    // زر الخلفية
+                    const backgroundBtn = document.createElement('button');
+                    backgroundBtn.className = 'color-button';
+                    backgroundBtn.textContent = 'الخلفية';
+                    backgroundBtn.addEventListener('click', () => {
+                        openColorPicker(design.id, version, 'background');
+                    });
+                    
+                    // زر النقشة
+                    const patternBtn = document.createElement('button');
+                    patternBtn.className = 'color-button';
+                    patternBtn.textContent = 'النقشة';
+                    patternBtn.addEventListener('click', () => {
+                        openColorPicker(design.id, version, 'pattern');
+                    });
+                    
+                    // زر الحواشي
+                    const edgesBtn = document.createElement('button');
+                    edgesBtn.className = 'color-button';
+                    edgesBtn.textContent = 'الحواشي';
+                    edgesBtn.addEventListener('click', () => {
+                        openColorPicker(design.id, version, 'edges');
+                    });
+                    
+                    colorButtons.appendChild(backgroundBtn);
+                    colorButtons.appendChild(patternBtn);
+                    colorButtons.appendChild(edgesBtn);
+                    
+                    const colorDisplay = document.createElement('div');
+                    colorDisplay.className = 'color-display';
+                    
+                    // عرض لون الخلفية
+                    const bgColorDisplay = document.createElement('div');
+                    bgColorDisplay.className = 'color-display';
+                    
+                    const bgColorCircle = document.createElement('div');
+                    bgColorCircle.className = 'color-circle';
+                    bgColorCircle.style.backgroundColor = design.colors[version].background || '#ffffff';
+                    
+                    const bgColorCode = document.createElement('span');
+                    bgColorCode.className = 'color-code';
+                    bgColorCode.textContent = design.colors[version].background || '#ffffff';
+                    
+                    bgColorDisplay.appendChild(bgColorCircle);
+                    bgColorDisplay.appendChild(bgColorCode);
+                    
+                    // عرض لون النقشة
+                    const patternColorDisplay = document.createElement('div');
+                    patternColorDisplay.className = 'color-display';
+                    
+                    const patternColorCircle = document.createElement('div');
+                    patternColorCircle.className = 'color-circle';
+                    patternColorCircle.style.backgroundColor = design.colors[version].pattern || '#000000';
+                    
+                    const patternColorCode = document.createElement('span');
+                    patternColorCode.className = 'color-code';
+                    patternColorCode.textContent = design.colors[version].pattern || '#000000';
+                    
+                    patternColorDisplay.appendChild(patternColorCircle);
+                    patternColorDisplay.appendChild(patternColorCode);
+                    
+                    // عرض لون الحواشي
+                    const edgesColorDisplay = document.createElement('div');
+                    edgesColorDisplay.className = 'color-display';
+                    
+                    const edgesColorCircle = document.createElement('div');
+                    edgesColorCircle.className = 'color-circle';
+                    edgesColorCircle.style.backgroundColor = design.colors[version].edges || '#000000';
+                    
+                    const edgesColorCode = document.createElement('span');
+                    edgesColorCode.className = 'color-code';
+                    edgesColorCode.textContent = design.colors[version].edges || '#000000';
+                    
+                    edgesColorDisplay.appendChild(edgesColorCircle);
+                    edgesColorDisplay.appendChild(edgesColorCode);
+                    
+                    versionContainer.appendChild(versionHeader);
+                    versionContainer.appendChild(colorButtons);
+                    versionContainer.appendChild(bgColorDisplay);
+                    versionContainer.appendChild(patternColorDisplay);
+                    versionContainer.appendChild(edgesColorDisplay);
+                    
+                    colorVersions.appendChild(versionContainer);
+                });
+            }
+
+            // فتح منتقي الألوان
+            function openColorPicker(designId, version, colorType) {
+                const design = designsData[designId - 1];
+                const currentColor = design.colors[version][colorType] || '#000000';
+                
+                // إنشاء عنصر input من نوع color مخفي
+                const colorInput = document.createElement('input');
+                colorInput.type = 'color';
+                colorInput.value = currentColor;
+                colorInput.style.position = 'fixed';
+                colorInput.style.opacity = 0;
+                colorInput.style.pointerEvents = 'none';
+                
+                document.body.appendChild(colorInput);
+                
+                // فتح منتقي الألوان
+                colorInput.click();
+                
+                // تحديث اللون عند التغيير
+                colorInput.addEventListener('input', function() {
+                    design.colors[version][colorType] = colorInput.value;
+                    renderColorVersions(design);
+                    updateDesignStatus(design);
+                    saveDataToLocalStorage();
+                });
+                
+                // إزالة عنصر input بعد الاختيار
+                setTimeout(() => {
+                    document.body.removeChild(colorInput);
+                }, 100);
+            }
+
+            // تحديث الإحصائيات
+            function updateStats() {
+                const readyCount = designsData.filter(design => design.image !== '').length;
+                const completedCount = designsData.filter(design => design.status === 'sent').length;
+                
+                document.getElementById('ready-count').textContent = readyCount;
+                document.getElementById('completed-count').textContent = completedCount;
+            }
+
+            // حفظ البيانات في localStorage
+            function saveDataToLocalStorage() {
+                const dataToSave = designsData.map(design => ({
+                    id: design.id,
+                    colors: design.colors,
+                    status: design.status
+                }));
+                
+                localStorage.setItem('designsData', JSON.stringify(dataToSave));
+            }
+
+            // تأكيد الألوان وإرسالها عبر واتساب
+            confirmBtn.addEventListener('click', function() {
+                if (!currentDesignId) return;
+                
+                const design = designsData[currentDesignId - 1];
+                design.status = 'sent';
+                
+                // إنشاء نص الرسالة
+                let message = `عزيزي المصمم المبدع صدام .. قم بأعتماد هذه الالوان للتصميم رقم (${design.id}):\n_______________\n`;
+                
+                const versions = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+                
+                versions.forEach(version => {
+                    message += `-- الاصدار ${version} /\n`;
+                    message += `* لون الخلفية : ${design.colors[version].background || '#ffffff'}\n`;
+                    message += `* لون النقشة : ${design.colors[version].pattern || '#000000'}\n`;
+                    message += `* لون الحواشي : ${design.colors[version].edges || '#000000'}\n`;
+                    message += '-----\n';
+                });
+                
+                // ترميز النص للرابط
+                const encodedMessage = encodeURIComponent(message);
+                
+                // إنشاء رابط واتساب
+                const whatsappUrl = `https://wa.me/967777967272?text=${encodedMessage}`;
+                
+                // فتح الرابط في نافذة جديدة
+                window.open(whatsappUrl, '_blank');
+                
+                // تحديث الواجهة
+                updateDesignStatus(design);
+                renderDesignsGrid();
+                saveDataToLocalStorage();
+            });
+
+            // حفظ مؤقت
+            saveBtn.addEventListener('click', function() {
+                if (!currentDesignId) return;
+                
+                const design = designsData[currentDesignId - 1];
+                design.status = 'selected';
+                
+                updateDesignStatus(design);
+                renderDesignsGrid();
+                saveDataToLocalStorage();
+                
+                alert('تم حفظ الألوان مؤقتاً');
+            });
+
+            // تصفير الخانات
+            resetBtn.addEventListener('click', function() {
+                if (!currentDesignId) return;
+                
+                if (confirm('هل أنت متأكد من أنك تريد مسح جميع الألوان لهذا التصميم؟')) {
+                    const design = designsData[currentDesignId - 1];
+                    
+                    // إعادة تعيين جميع الألوان
+                    const versions = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+                    versions.forEach(version => {
+                        design.colors[version] = { background: '', pattern: '', edges: '' };
+                    });
+                    
+                    design.status = 'not-selected';
+                    
+                    renderColorVersions(design);
+                    updateDesignStatus(design);
+                    renderDesignsGrid();
+                    saveDataToLocalStorage();
+                }
+            });
+
+            // العودة إلى صفحة النقشات
+            backBtn.addEventListener('click', function() {
+                colorModal.style.display = 'none';
+            });
+
+            // إغلاق النافذة عند النقر خارجها
+            window.addEventListener('click', function(event) {
+                if (event.target === colorModal) {
+                    colorModal.style.display = 'none';
+                }
+            });
+
+            // تهيئة التطبيق
+            renderDesignsGrid();
+        });
+    </script>
+</body>
+</html>
