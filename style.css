@@ -1,142 +1,1146 @@
-   /* CSS الحالي بدون تعديلات */
-    :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #34495e;
-        --accent-color: #3498db;
-        --light-color: #ecf0f1;
-        --success-color: #27ae60;
-        --warning-color: #e67e22;
-        --danger-color: #e74c3c;
-        --neutral-color: #bdc3c7;
-    }
+/* CSS الحالي بدون تعديلات */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --light-color: #ecf0f1;
+    --success-color: #27ae60;
+    --warning-color: #e67e22;
+    --danger-color: #e74c3c;
+    --neutral-color: #bdc3c7;
+}
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    body {
-        background-color: var(--primary-color);
-        line-height: 1.5;
-    }
+body {
+    background-color: var(--primary-color);
+    line-height: 1.5;
+}
 
-    .container {
-        width: 100%;
-        max-width: 768px;
-        margin: 0 auto;
-        padding: 0 15px;
-        background-color: var(--primary-color);
-    }
+.container {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 15px;
+    background-color: var(--primary-color);
+}
 
-    /* Header Styles */
-    header {        
-        padding-top: 70px;
-        padding-bottom: 20px;
-        width:90%;
-        margin: 0 auto;
-    }
+/* Header Styles */
+header {
+    padding-top: 70px;
+    padding-bottom: 20px;
+    width: 90%;
+    margin: 0 auto;
+}
 
-    header h1 {
-        text-align: center;
-        margin-bottom: 15px;
-        font-size: 28px;
-        font-weight: 600;
-        color:#c3bb97;
-    }
+header h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #c3bb97;
+}
 
-    .welcome-message {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 20px;
-        color:#dfddd2;
-    }
+.welcome-message {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #dfddd2;
+}
 
-    .stats-container {
-        display: flex;
-        justify-content: space-around;
-        margin: 0 auto;
-        flex-direction: row;
-        gap:20px;
-        padding-bottom: 40px;
-    }
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    flex-direction: row;
+    gap: 20px;
+    padding-bottom: 40px;
+}
 
-    .stat-box {
-        background-color: var(--secondary-color);
-        padding: 15px;
-        border-radius: 20px;
-        border: 1px solid #416c89;
-        flex: 1;
-        margin: 0 auto;
-        text-align: center;
-         max-width: 200px;
-    }
+.stat-box {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid #416c89;
+    flex: 1;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 200px;
+}
 
-    .stat-box h3 {
-        margin-bottom: 10px;
-        font-size: 13px;
-        color:#bbd9fc;
-    }
+.stat-box h3 {
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #bbd9fc;
+}
 
-    .stat-box .count {
-        font-size: 30px;
-        font-weight: bold;
-        color: var(--accent-color);
-    }
+.stat-box .count {
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--accent-color);
+}
 
-    .nav-button {
-        display: block;
-        width: 100%;
-        max-width: 170px;
-        margin: 0 auto;
-        padding: 8px 16px;
-        background-color: var(--accent-color);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 11px;
-        font-weight: 700;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
-    .nav2 { 
-        margin-top: 40px;
-        margin-bottom:   80px;
-        background-color: var(--accent-color); 
-    }
-    .nav-button:hover {
-        background-color: #2980b9;
-    }
+.nav-button {
+    display: block;
+    width: 100%;
+    max-width: 170px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.nav2 {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    background-color: var(--accent-color);
+}
+
+.nav-button:hover {
+    background-color: #2980b9;
+}
+
+/* Designs Grid Styles */
+.designs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 50px;
+}
+
+.design-container {
+    background-color: #bdc9d2;
+    border-radius: 8px;
+    border: 2px dashed #e6edee;
+    overflow: hidden;
+    height: 500px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.design-image {
+    flex: 1;
+    background-color: var(--neutral-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.design-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.design-meta {
+    background: rgba(26, 26, 29, 0.8);
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.design-id {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #bbd9fc;
+}
+
+.design-colors-number {
+    font-size: 11px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.design-button {
+    padding: 5px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1.3;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.design-button:hover {
+    background-color: #2980b9;
+}
+
+.design-button.edit {
+    background-color: var(--warning-color);
+}
+
+.design-button.edit:hover {
+    background-color: #d35400;
+}
+
+/* Color Selection Modal */
+.color-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: #e8ecf2;
+    padding-bottom: 40px;
+    width: 460px;
+    max-width: 100%;
+    margin: 20px auto;
+    border-radius: 8px;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    background-color: var(--primary-color);
+    color: #b8b191;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-button {
+    color: #e43f3f;
+    float: left;
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+    margin-left: 10px;
+    order: 1;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #ff7f7f;
+    text-decoration: none;
+}
+
+.color-selection-container {
+    display: flex;
+    flex-direction: row;
+    min-height: 600px;
+}
+
+.color-versions {
+    width: 410px;
+    padding-bottom: 10px;
+    overflow-y: auto;
+}
+
+.version-container {
+    margin-top: 5px;
+    padding: 5px;
+    height: 60px;
+    background: #eff3f7;
+    border-bottom: 1px dashed var(--primary-color);
+    display: flex;
+    flex-direction: row;
+}
+
+.version-header {
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 0 10px 10px 0;
+    border: none;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--accent-color);
+    color: #fff;
+}
+
+.colors-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.color-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0;
+}
+
+.color-button {
+    padding: 4px 4px;
+    background-color: #bbd9fc;
+    color: #000;
+    border: none;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    font-size: 12px;
+    flex: 1;
+    margin: 0 3px;
+}
+
+.color-display-container {
+    display: flex;
+    flex-direction: row;
+    /* جعلها صفوف مثل الأزرار */
+    justify-content: space-between;
+    margin-top: 3px;
+}
+
+.color-display {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin: 0 3px;
+    padding: 2px 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.color-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 8px;
+    border: 1px solid #a7a7a7;
+}
+
+.color-code {
+    font-size: 12px;
+    font-family: monospace;
+}
+
+.design-preview {
+    min-width: 100px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-header {
+    width: 100%;
+    height: 150px;
+    background-color: var(--secondary-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.preview-id {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    color: #bbd9fc;
+}
+
+.preview-number {
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.preview-status {
+    margin-top: 0;
+    font-size: 12px;
+    padding: 8px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.status-not-selected {
+    background-color: var(--danger-color);
+}
+
+.status-selected {
+    background-color: var(--warning-color);
+}
+
+.status-sent {
+    background-color: var(--success-color);
+}
+
+.preview-image {
+    width: 100%;
+    max-height: 400px;
+    background-color: var(--neutral-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.preview-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.modal-actions {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    justify-content: center;
+    background-color: none;
+    border-top: 2px solid #e9ecef;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.action-button {
+    width: 90%;
+    padding: 10px 16px;
+    margin: 0 auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 800;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.confirm-btn {
+    background-color: #28556d;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background-color: #246a8e;
+}
+
+.save-btn {
+    background-color: #286b49;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #228a55;
+}
+
+.reset-btn {
+    background-color: #713737;
+    color: white;
+}
+
+.reset-btn:hover {
+    background-color: #9f2e2e;
+}
+
+.back-btn {
+    background-color: var(--neutral-color);
+    color: var(--primary-color);
+}
+
+.back-btn:hover {
+    background-color: #a6acaf;
+}
+
+/* ========== إضافة أنماط جديدة ========== */
+
+/* زر معاينة في القسم الأول */
+.preview-btn {
+    background-color: #9b59b6;
+    margin-top: 5px;
+}
+
+.preview-btn:hover {
+    background-color: #8e44ad;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* الحاوية */
+.modal-content {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 380px;
+    max-height: 600px;
+    overflow: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* الصورة */
+.modal-content img {
+    max-width: 350px;
+    max-height: 550px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* نافذة معاينة الصورة */
+.image-preview-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.image-preview-content {
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 380px;
+    max-height: 600px;
+    overflow: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.image-preview-content img {
+    max-width: 350px;
+    max-height: 550px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.close-preview {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-preview:hover {
+    color: #bbb;
+}
+
+/* قسم مساعد تلوين الخلفيات */
+.backgrounds-section {
+    width: 96%;
+    margin: 0 auto;
+    padding-bottom: 90px;
+    background-color: var(--primary-color);
+    min-height: 500px;
+}
+
+.backgrounds-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.backgrounds-controls {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    gap: 10px;
+    width: 90%;
+    padding-bottom: 20px;
+}
+
+.backgrounds-control {
+    flex: 1;
+    background-color: var(--secondary-color);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.backgrounds-control h3 {
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #bbd9fc;
+}
+
+.backgrounds-control select {
+    width: 90%;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #416c89;
+    background-color: #ecf0f1;
+}
+
+.backgrounds-content {
+    display: flex;
+    height: 60vh;
+    gap: 5px;
+    margin-bottom: 30px;
+}
+
+.color-panel {
+    width: 400px;
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: 0 20px 20px 0;
+}
+
+.color-panel h3 {
+    margin-bottom: 15px;
+    color: #bbd9fc;
+    text-align: center;
+}
+
+.color-group h4 {
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 12px;
+    text-align: right;
+    display: none;
+}
+
+.color-buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+}
+
+.color-button {
+    max-width: 25px;
+    width: 100%;
+    height: 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.color-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.color-button.selected {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 1px white, 0 0 0 2px #3498db;
+}
+
+.color-palette {
+    margin-bottom: 30px;
+}
+
+.color-picker {
+    margin-top: 20px;
+}
+
+/* تنسيقات حقول ألوان النقشة المضافة حديثًا */
+.pattern-color-controls {
+    /* يجعل الحاوية منفصلة وواضحة ضمن لوحة الألوان */
+    padding: 10px 0;
+    margin-top: 15px;
+    border-top: 1px solid #3c5d79;
+    /* خط فاصل خفيف */
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.pattern-color-controls h3 {
+    /* تنسيق عنوان "اختيار الوان النقشة" */
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: var(--accent-color);
+    /* يمكن استخدام لون مميز هنا */
+    text-align: center;
+}
+
+.color-control-item {
+    display: flex;
+    justify-content: space-between;
+    /* توزيع العناصر على الجانبين */
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.color-control-item label {
+    /* تنسيق النص (لون الحاشية/لون النقشة) */
+    font-size: 13px;
+    color: #bbd9fc;
+    flex-grow: 1;
+    /* للسماح للنص بأخذ المساحة اللازمة */
+    padding-left: 10px;
+    /* مسافة عن اليمين */
+}
+
+.color-control-item .color-picker-input {
+    /* تنسيق حقل اختيار اللون نفسه (input[type="color"]) */
+    width: 60px;
+    /* حجم مناسب للحقل */
+    height: 30px;
+    padding: 0;
+    border: 2px solid #5d8aa7;
+    border-radius: 5px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.image-display {
+    width: 135px;
+    height: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-display img {
+    width: 165px;
+    height: auto;
+    max-height: 100%;
+    z-index: 1001;
+}
+
+.confirm-background-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.confirm-background-btn:hover {
+    background-color: #2980b9;
+}
+
+/* نافذة تعديل الوان الاصدار المنفرد */
+.single-version-modal {
+    display: none;
+}
+
+/* زر تعديل الوان الاصدار */
+.edit-version-btn {
+    background-color: var(--warning-color);
+    margin-top: 5px;
+}
+
+.edit-version-btn:hover {
+    background-color: #d35400;
+}
+
+/* باقي الأنماط الحالية بدون تعديل */
+/* ... (CSS الموجود سابقًا) ... */
+
+/* أنماط القسم الثاني */
+.container2 {
+    /* تم التعديل */
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 10px;
+    background-color: var(--primary-color);
+}
+
+.welcome-message2 {
+    /* تم التعديل */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #dfddd2;
+}
+
+.stats-container2 {
+    /* تم التعديل */
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    flex-direction: row;
+    gap: 20px;
+    padding-bottom: 50px;
+}
+
+.stat-box2 {
+    /* تم التعديل */
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: 5px;
+    flex: 1;
+    margin: 0 20px;
+    text-align: center;
+    min-width: 195px;
+}
+
+.stat-box2 h3 {
+    /* تم التعديل */
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #bbd9fc;
+}
+
+.stat-box2 .count2 {
+    /* تم التعديل */
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.nav-button2 {
+    /* تم التعديل */
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.nav22 {
+    /* تم التعديل */
+    margin-top: 50px;
+    margin-bottom: 80px;
+    background-color: var(--accent-color);
+}
+
+.nav-button2:hover {
+    /* تم التعديل */
+    background-color: #2980b9;
+}
+
+/* Designs Grid Styles */
+.designs-grid2 {
+    /* تم التعديل */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 70px;
+}
+
+.design-container2 {
+    /* تم التعديل والتحديث */
+    background: var(--primary-color);
+    overflow: hidden;
+    height: 600px;
+    /* الارتفاع المطلوب */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.design-right2 {
+    /* تم التعديل والتحديث */
+    width: 18%;
+    /* العرض المطلوب */
+    height: 500px;
+    /* الارتفاع المطلوب */
+    display: flex;
+    border-radius: 0 10px 10px 0;
+    flex-direction: column;
+    background-color: none;
+    border: 1px solid #e6edee;
+    padding: 0;
+}
+
+.design-meta2 {
+    /* تم التعديل والتحديث */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100px;
+    /* الارتفاع المطلوب */
+    background-color: #bdc9d2;
+    border-radius: 0 0 9px 0;
+}
+
+.design-id2 {
+    /* تم التعديل */
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 0;
+    background-color: var(--accent-color);
+    color: white;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+}
+
+.design-colors-number2 {
+    /* تم التعديل */
+    font-size: 11px;
+    margin-bottom: 0;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.design-button2 {
+    /* تم التعديل */
+    padding: 5px;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1.4;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.design-button2:hover {
+    /* تم التعديل */
+    background-color: #2980b9;
+}
+
+.design-button2.edit2 {
+    /* تم التعديل */
+    background-color: var(--warning-color);
+}
+
+.design-button2.edit2:hover {
+    /* تم التعديل */
+    background-color: #d35400;
+}
+
+.design-main-image2 {
+    /* تم التعديل والتحديث */
+    height: 400px;
+    /* الارتفاع المطلوب */
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0 10px 0 0;
+}
+
+.design-main-image2 img {
+    /* تم التعديل والتحديث */
+    width: 100%;
+    height: 400px;
+    /* الارتفاع المطلوب */
+    object-fit: cover;
+}
+
+.design-left2 {
+    /* تم التعديل والتحديث */
+    width: 80%;
+    /* العرض المطلوب */
+    height: 500px;
+    /* الارتفاع المطلوب */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    margin-right: 10px;
+}
+
+.versions-rows2 {
+    /* تم التعديل */
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    /* مطابق لارتفاع design-left2 */
+    gap: 8px;
+}
+
+.versions-row2 {
+    /* تم التعديل والتحديث */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 250px;
+    /* الارتفاع المطلوب */
+}
+
+.version-item2 {
+    /* تم التعديل والتحديث */
+    width: 18%;
+    /* 5 في الصف، مع مسافات */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #bdc9d2;
+    border: 1px solid #e6edee;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 245px;
+    /* الارتفاع المطلوب */
+}
+
+.version-image2 {
+    /* تم التعديل والتحديث */
+    width: 100%;
+    height: 200px;
+    /* ارتفاع الصورة المطلوب */
+    overflow: hidden;
+}
+
+.version-image2 img {
+    /* تم التعديل والتحديث */
+    width: 100%;
+    height: 200px;
+    /* ارتفاع الصورة المطلوب */
+    object-fit: cover;
+}
+
+.version-name2 {
+    /* تم التعديل والتحديث */
+    padding: 5px;
+    /* تم تقليل البادينغ ليتسع الـ 50px */
+    font-weight: bold;
+    text-align: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    /* منع الانكماش */
+    height: 25px;
+    /* تقسيم 50px */
+    margin-bottom: 4px;
+}
+
+.version-view-button2 {
+    /* الزر الجديد */
+    padding: 0 5px;
+    background-color: var(--warning-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    height: 25px;
+    /* تقسيم 50px */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 0 0 8px 8px;
+}
+
+.version-view-button2:hover {
+    background-color: #d35400;
+}
+
+.version-bottom2 {
+    /* تم التعديل والتحديث */
+    gap: 10px;
+    padding-bottom: 0;
+    /* تم إزالة البادينغ السفلي الأصلي */
+    width: 100%;
+    height: 100px;
+    /* الارتفاع المطلوب */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.version-text2 {
+    /* تم التعديل */
+    text-align: center;
+    font-size: 14px;
+    color: #bbd9fc;
+}
+
+.version-button2 {
+    /* تم التعديل */
+    display: block;
+    width: 150px;
+    max-width: 300px;
+    margin-top: 5px;
+    padding: 6px 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.version-button2:hover {
+    /* تم التعديل */
+    background-color: #2980b9;
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* ========== أنماط الاستجابة للشاشات الصغيرة جدًا (480 بكسل وما دون) ========== */
+@media (max-width: 480px) {
 
     /* Designs Grid Styles */
     .designs-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-        margin-top: 50px;
+        gap: 8px;
+        width:100%;
+        margin: 0 auto;
     }
 
     .design-container {
-        background-color: #bdc9d2;
-        border-radius: 8px;
-        border:2px dashed #e6edee;
-        overflow: hidden;
-        height: 500px;
-        width:100px;
-        display: flex;
-        flex-direction: column; /* تغيير إلى عمودي لجعلها قسم واحد */
-    }
-
-    .design-image {
-        flex: 1;
-        background-color: var(--neutral-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+        height: 380px;
+        width:95px;
+        margin: 0 auto;
     }
 
     .design-image img {
@@ -145,257 +1149,109 @@
         object-fit: cover;
     }
 
-    .design-meta {
-        background : rgba(26, 26, 29, 0.8);
-        padding: 7px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
     .design-id {
-        font-size: 13px;
-        font-weight: 700;
-        margin-bottom: 5px;
-        color:#bbd9fc;
+        font-size: 13px    
     }
-    
+	
     .design-colors-number {
-        font-size: 11px;
-        margin-bottom: 10px;
-        color: #fff;
+        font-size: 11px;      
     }
-    
+	
     .design-button {
-        padding: 5px;
-        background-color: var(--accent-color);
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+        padding: 7px;
         font-size: 12px;
-        line-height: 1.3;
-        transition: background-color 0.3s;
-        width: 100%;
-        margin-bottom: 5px;
+        line-height: 1.4;      
     }
 
-    .design-button:hover {
-        background-color: #2980b9;
-    }
-
-    .design-button.edit {
-        background-color: var(--warning-color);
-    }
-
-    .design-button.edit:hover {
-        background-color: #d35400;
-    }
-
+ 
     /* Color Selection Modal */
     .color-modal {
-        display:none;
-        position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.7);
-        z-index: 1000;
-        overflow-y: auto;
+        height: 100%;		
     }
 
     .modal-content {
-        background-color: #e8ecf2;
-        padding-bottom: 40px;
+        padding-bottom: 30px;
         width: 460px;
         max-width: 100%;
-        margin: 20px auto;
-        border-radius: 8px;
-        overflow-y: auto;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        margin: 20px auto;       
     }
 
     .modal-header {
-        background-color: var(--primary-color);
-        color: #b8b191;
-        padding: 15px;
-        text-align: center;
-        font-size: 1.3rem;
-        font-weight: 800;
-        display: flex;
-        justify-content: space-between; 
-        align-items: center;
+        padding: 20px;
+        font-size: 19px ;        
     }
  
-    .close-button {
-        color: #e43f3f;
-        float: left;  
-        font-size: 30px;
-        cursor: pointer;
-        line-height: 1; 
-        margin-left: 10px;  
-        order:  1;  
-    }
-
-    .close-button:hover,
-    .close-button:focus {
-        color: #ff7f7f;
-        text-decoration: none;
-    }
-    
-    .color-selection-container {
-        display: flex;
-        flex-direction: row;
-        min-height: 600px;
-    }
+.close-button {
+    font-size: 27px;
+}
 
     .color-versions {
         width: 410px;
-        padding-bottom: 10px;
-        overflow-y: auto;
+        padding-bottom: 5px;  
     }
 
     .version-container {
         margin-top: 5px;
-        padding: 5px;
-        height:60px;
-        background:#eff3f7;
-        border-bottom: 1px dashed var(--primary-color);
-        display:flex;
-        flex-direction:row;
+        padding: 3px;
+		height:52px;		
     }
 
     .version-header {
-        font-weight: bold;
-        padding: 8px;
-        border-radius:0 10px   10px 0 ;
-        border:none;
-        font-size: 17px;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background:var(--accent-color);
-        color:#fff;
+        padding: 7px;
+        font-size: 15px;
     }
-    
-    .colors-container {
-        display: flex;
-        flex-direction: column;
-        width:100%;
-    } 
-    
-    .color-buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-bottom: 0;
-    }
-
     .color-button {
-        padding: 4px 4px;
-        background-color: #bbd9fc;
-        color: #000;
-        border: none;
-        border-radius: 8px 0 0 8px;
-        cursor: pointer;
-        font-size: 12px;
-        flex: 1;
+        padding: 3px 3px;
+        font-size: 11px;
         margin: 0 3px;
     }
 
     .color-display-container {
-        display: flex;
-        flex-direction: row; /* جعلها صفوف مثل الأزرار */
-        justify-content: space-between;
-        margin-top: 3px;
+        margin-top: 2px;
     }
 
     .color-display {
-        display: flex;
-        align-items: center;
-        flex: 1;
         margin: 0 3px;
-        padding: 2px 4px;
-        background-color: rgba(255,255,255,0.1); 
-        border-radius: 3px;
+        padding: 1px 3px;
     }
 
     .color-circle {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        margin-left: 8px;
-        border: 1px solid #a7a7a7;
+        width: 18px;
+        height: 18px;
+        margin-left: 5px;
     }
 
     .color-code {
-        font-size: 12px;
+        font-size: 11px;
         font-family: monospace;
     }
 
     .design-preview {
-        min-width: 100px;
-        padding: 5px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        min-width: 90px;
+        padding: 4px;
     }
 
     .preview-header {
-        width: 100%;
-        height: 150px;
-        background-color: var(--secondary-color);
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        border-radius: 5px;
-        margin-bottom: 10px;
+        height: 140px;
+        margin-bottom:15px;
     }
-    
     .preview-id {
-        font-size: 14px;
-        font-weight: 700;
-        margin-bottom: 5px;
-        margin-top: 10px;
-        color:#bbd9fc;
+        font-size: 13px;
+        margin-bottom: 3px;
+		margin-top: 8px;
     } 
-    
     .preview-number {
-        font-size: 23px;
-        font-weight: bold;
-        margin-bottom: 5px;
+        font-size: 20px;
     }
 
     .preview-status {
-        margin-top: 0;
-        font-size: 12px;
-        padding: 8px  ;
-        border-radius: 3px;
-        text-align: center;
-    }
-
-    .status-not-selected {
-        background-color: var(--danger-color);
-    }
-
-    .status-selected {
-        background-color: var(--warning-color);
-    }
-
-    .status-sent {
-        background-color: var(--success-color);
+        font-size: 11px;
+        padding: 6px  ;
     }
 
     .preview-image {
-        width: 100%;
-        max-height: 400px;
-        background-color: var(--neutral-color);
-        border-radius: 5px;
-        overflow: hidden;
+       max-height: 400px;
     }
 
     .preview-image img {
@@ -405,863 +1261,275 @@
     }
 
     .modal-actions {
-        padding: 5px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        justify-content: center;
-        background-color: none;
-        border-top: 2px solid #e9ecef;
-        margin-top: 15px;
-        width:100%;
+        padding: 5px;      
+        gap: 10px;   
+        margin-top: 0;
     }
 
     .action-button {
-        width:90%;
+		 width:80%;
         padding: 10px 16px;
-        margin:0 auto;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
         font-size: 13px;
-        font-weight: 800;
-        transition: all 0.3s;
-        flex: 1;
-    }
-
-    .confirm-btn {
-        background-color: #28556d;
-        color: white;
-    }
-
-    .confirm-btn:hover {
-        background-color: #246a8e;
-    }
-
-    .save-btn {
-        background-color: #286b49;
-        color: white;
-    }
-
-    .save-btn:hover {
-        background-color: #228a55;
-    }
-
-    .reset-btn {
-        background-color:#713737;
-        color: white;
-    }
-
-    .reset-btn:hover {
-        background-color: #9f2e2e;
-    }
-
-    .back-btn {
-        background-color: var(--neutral-color);
-        color: var(--primary-color);
-    }
-
-    .back-btn:hover {
-        background-color: #a6acaf;
-    }
-
-    /* ========== إضافة أنماط جديدة ========== */
-    
-    /* زر معاينة في القسم الأول */
-    .preview-btn {
-        background-color: #9b59b6;
-        margin-top: 5px;
-    }
-    
-    .preview-btn:hover {
-        background-color: #8e44ad;
-    }
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-
-    /* الحاوية */
-    .modal-content {
-      background-color: white;
-      padding: 15px;
-      border-radius: 8px;
-      max-width: 380px;
-      max-height: 600px;
-      overflow: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-
-    /* الصورة */
-    .modal-content img {
-      max-width: 350px;
-      max-height: 550px;
-      width: auto;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-    /* نافذة معاينة الصورة */
-    .image-preview-modal {
-         display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-    
-    .image-preview-content {
-      padding: 15px;
-      border-radius: 8px;
-      max-width: 380px;
-      max-height: 600px;
-      overflow: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-    
-    .image-preview-content img {
-          max-width: 350px;
-      max-height: 550px;
-      width: auto;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-    
-    .close-preview {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    
-    .close-preview:hover {
-        color: #bbb;
-    }
-    
-    /* قسم مساعد تلوين الخلفيات */
-    .backgrounds-section {
-        width: 96%;
-        margin: 0 auto;
-        padding-bottom:90px;
-        background-color: var(--primary-color);
-        min-height: 500px;
-    }
-    
-    .backgrounds-header {
-        text-align: center;
-        margin-bottom: 20px;
         
     }
-    
-    .backgrounds-controls {
-        display: flex;
-        justify-content: space-between;
+
+    /* التنسيقات العامة للحاوية */
+    .container2 {
+        width: 100%;
         margin: 0 auto;
+        padding: 0 0;
+    }
+
+    /* أنماط الـ Header */
+    header {
+        padding-bottom: 40px;
+        padding-top: 50px;
+        width: 93%;
+        margin: 0 auto;
+    }
+
+    header h1 {
+        margin-bottom: 15px;
+        font-size: 23px;
+        font-weight: 600;
+    }
+
+    .welcome-message2 {
+        margin-bottom: 17px;
+        font-size: 17px;
+    }
+
+    /* أنماط إحصائيات لوحة التحكم */
+    .stats-container2 {
         gap: 10px;
-        width:90%;
-        padding-bottom: 20px;
+        padding-bottom: 35px;
+        width: 100%;
     }
-    
-    .backgrounds-control {
-        flex: 1;
-        background-color: var(--secondary-color);
-        padding: 5px;
-        border-radius: 5px;
-        text-align: center;
+
+    .stat-box2 {
+        padding: 10px;
+        border-radius: 10px;
+        margin: 0 auto;
+        min-width: 180px;
     }
-    
-    .backgrounds-control h3 {
+
+    .stat-box2 h3 {
         margin-bottom: 10px;
         font-size: 12px;
-        color: #bbd9fc;
-    }
-    
-    .backgrounds-control select {
-        width: 90%;
-        padding: 5px;
-        border-radius: 4px;
-        border: 1px solid #416c89;
-        background-color: #ecf0f1;
-    }
-    
-    .backgrounds-content {
-        display: flex;
-        height: 60vh;
-        gap: 5px;
-        margin-bottom: 30px;
-    }
-    
-    .color-panel {
-        width: 400px;
-        background-color: var(--secondary-color);
-        padding: 20px;
-        border-radius: 0 20px 20px 0;
-        
-    }
-    
-    .color-panel h3 {
-        margin-bottom: 15px;
-        color: #bbd9fc;
-        text-align: center;
-    }
-    
-    .color-palette {
-        margin-bottom: 20px;
-    }
-    
-    .color-picker {
-        margin-top: 20px;
-    }
-    
-    .image-display {
-        width: 165px;
-        height: 100%;
-        background-color: var(--secondary-color);
-        border-radius: 20px 0 0 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    
-    .image-display img {
-        width: 165px;
-        height: auto;
-        max-height: 100%;
-    }
-    
-    .confirm-background-btn {
-        display: block;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        padding: 12px 20px;
-        background-color: var(--accent-color);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        text-align: center;
-        transition: background-color 0.3s;
-    }
-    
-    .confirm-background-btn:hover {
-        background-color: #2980b9;
-    }
-    
-    /* نافذة تعديل الوان الاصدار المنفرد */
-    .single-version-modal {
-        display: none;
-    }
-    
-    /* زر تعديل الوان الاصدار */
-    .edit-version-btn {
-        background-color: var(--warning-color);
-        margin-top: 5px;
-    }
-    
-    .edit-version-btn:hover {
-        background-color: #d35400;
     }
 
-    /* باقي الأنماط الحالية بدون تعديل */
-    /* ... (CSS الموجود سابقًا) ... */
-
-    @media (max-width: 480px) {
-        /* أنماط الاستجابة الحالية بدون تعديل */
-        /* ... (CSS الموجود سابقًا) ... */
-        
-        /* أنماط الاستجابة الجديدة */
-       
-    }
-
-    @media (max-width: 380px) {
-        /* أنماط الاستجابة الحالية بدون تعديل */
-        /* ... (CSS الموجود سابقًا) ... */
-    }
-    
-    .container2 { /* تم التعديل */
-        width: 100%;
-        max-width: 768px;
-        margin: 0 auto;
-        padding: 0 10px;
-        background-color: var(--primary-color);
-    }
-  
-    .welcome-message2 { /* تم التعديل */
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 22px;
-        color:#dfddd2;
-    }
-
-    .stats-container2 { /* تم التعديل */
-        display: flex;
-        justify-content: space-around;
-        margin: 0 auto;
-        flex-direction: row;
-        gap:20px;
-        padding-bottom: 50px;
-    }
-
-    .stat-box2 { /* تم التعديل */
-        background-color: var(--secondary-color);
-        padding: 15px;
-        border-radius: 5px;
-        flex: 1;
-        margin: 0 20px;
-        text-align: center;
-         min-width: 195px;
-    }
-
-    .stat-box2 h3 { /* تم التعديل */
-        margin-bottom: 10px;
-        font-size: 13px;
-        color:#bbd9fc;
-    }
-
-    .stat-box2 .count2 { /* تم التعديل */
+    .stat-box2 .count2 {
         font-size: 30px;
-        font-weight: bold;
-        color: var(--accent-color);
     }
 
-    .nav-button2 { /* تم التعديل */
-        display: block;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
+    /* أنماط زر التنقل */
+    .nav-button2 {
+        width: 80%;
         padding: 8px 16px;
-        background-color: var(--accent-color);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 15px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        transition: background-color 0.3s;
+        font-size: 14px;
     }
-    
-    .nav22 { /* تم التعديل */
+
+    .nav22 {
         margin-top: 50px;
-        margin-bottom:   80px;
-        background-color: var(--accent-color); 
-    }
-    
-    .nav-button2:hover { /* تم التعديل */
-        background-color: #2980b9;
+        margin-bottom: 80px;
     }
 
-    /* Designs Grid Styles */
-    .designs-grid2 { /* تم التعديل */
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-        padding-bottom: 70px;
-    }
-
-    .design-container2 { /* تم التعديل والتحديث */
-        background:   var(--primary-color);        
+    /* أنماط شبكة التصاميم (Design Grid) */
+    .design-container2 {
         overflow: hidden;
-        height: 600px; /* الارتفاع المطلوب */
-        width: 100%;
-        display: flex;
-        flex-direction: row; 
-        cursor: pointer;
+        height: 600px;
+        /* تم تقليل الارتفاع في الموبايل */
+        width: 96%;
+        margin: 0 auto;
     }
 
-    .design-right2 { /* تم التعديل والتحديث */
-        width: 18%; /* العرض المطلوب */
-        height: 500px; /* الارتفاع المطلوب */
-        display: flex;
-        border-radius:0  10px 10px 0; 
-        flex-direction: column;
-        background-color:none;
-        border:1px solid #e6edee;
-        padding: 0;
-    }
-
-    .design-meta2 {  /* تم التعديل والتحديث */       
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        height: 100px; /* الارتفاع المطلوب */
-        background-color:#bdc9d2;
-        border-radius:0  0 9px  0;
-    }
-
-    .design-id2 { /* تم التعديل */
-        font-size: 14px;
-        font-weight: 700;
-        margin-bottom:0;
-        background-color: var(--accent-color);
-        color: white;
-        display: flex;
-        width:100%;
-        height:40px;
-        align-items: center;
-        justify-content: center;
-        border-radius:0; 
-    }
-    
-    .design-colors-number2 { /* تم التعديل */
-        font-size: 11px;
-        margin-bottom:0;
-        color:  var(--primary-color);
-        text-align: center;
-    }
-    
-    .design-button2 { /* تم التعديل */
-        padding: 5px;
-        background-color: var(--accent-color);
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 13px;
-        line-height: 1.4;
-        transition: background-color 0.3s;
-        width: 100%;
-    }
-
-    .design-button2:hover { /* تم التعديل */
-        background-color: #2980b9;
-    }
-
-    .design-button2.edit2 { /* تم التعديل */
-        background-color: var(--warning-color);
-    }
-
-    .design-button2.edit2:hover { /* تم التعديل */
-        background-color: #d35400;
-    }
-
-    .design-main-image2 { /* تم التعديل والتحديث */
-        height: 400px; /* الارتفاع المطلوب */
-        display: flex;   width: 100%;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border-radius:0   10px 0 0;
-    }
-
-    .design-main-image2 img { /* تم التعديل والتحديث */
-        width: 100%;
-        height: 400px; /* الارتفاع المطلوب */
-        object-fit: cover;
-    }
-
-    .design-left2 { /* تم التعديل والتحديث */
-        width: 80%; /* العرض المطلوب */
-        height: 500px; /* الارتفاع المطلوب */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 0;
-        margin-right:10px;
-    }
-
-    .versions-rows2 { /* تم التعديل */
-        display: flex;
-        flex-direction: column;
-        max-height: 500px; /* مطابق لارتفاع design-left2 */
-        gap: 8px;
-    }
-
-    .versions-row2 { /* تم التعديل والتحديث */
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        height: 250px; /* الارتفاع المطلوب */
-    }
-
-    .version-item2 { /* تم التعديل والتحديث */
-        width: 18%; /* 5 في الصف، مع مسافات */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    /* أنماط القسم الأيمن (الميتا) */
+    .design-right2 {
+        width: 20%;
+        /* تم زيادة العرض قليلاً للموبايل */
+        height: 500px;
+        /* تم تقليل الارتفاع للموبايل */
+        border-radius: 0 10px 10px 0;
         background-color: #bdc9d2;
-        border:1px solid #e6edee;
-        border-radius: 8px;
-        overflow: hidden;
-        height: 245px; /* الارتفاع المطلوب */
+        /* تم وضعه هنا لسهولة الرؤية */
+        border: 1px solid #e6edee;
     }
 
-    .version-image2 { /* تم التعديل والتحديث */
-        width: 100%;
-        height: 200px; /* ارتفاع الصورة المطلوب */
-        overflow: hidden;
+    .design-meta2 {
+        height: 120px;
+        /* تم تقليل الارتفاع للموبايل */
     }
 
-    .version-image2 img { /* تم التعديل والتحديث */
-        width: 100%;
-        height: 200px; /* ارتفاع الصورة المطلوب */
-        object-fit: cover;
-    }
-
-    .version-name2 { /* تم التعديل والتحديث */
-        padding: 5px; /* تم تقليل البادينغ ليتسع الـ 50px */
-        font-weight: bold;
-        text-align: center;
-        font-size:13px;
-        flex-shrink: 0; /* منع الانكماش */
-        height: 25px; /* تقسيم 50px */
-        margin-bottom:4px;
-    }
-    
-    .version-view-button2 { /* الزر الجديد */
-        padding: 0 5px;
-        background-color: var(--warning-color);
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        font-size: 11px;
-        height: 25px; /* تقسيم 50px */
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        border-radius:0 0 8px 8px;
-    }
-    
-    .version-view-button2:hover {
-        background-color: #d35400;
-    }
-
-    .version-bottom2 { /* تم التعديل والتحديث */
-        gap:10px;
-        padding-bottom: 0; /* تم إزالة البادينغ السفلي الأصلي */
-        width:100%;
-        height: 100px; /* الارتفاع المطلوب */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .version-text2  { /* تم التعديل */
-        text-align: center;
+    .design-id2 {
         font-size: 14px;
-        color:#bbd9fc;
+        margin-bottom: 8px;
+        height: 30px;
+        /* تم تقليل الارتفاع للموبايل */
     }
-    
-    .version-button2 { /* تم التعديل */
-        display: block;
+
+    .design-colors-number2 {
+        font-size: 11px;
+    }
+
+    .design-button2 {
+        padding: 7px;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    /* أنماط القسم الأيسر (الصورة الرئيسية والإصدارات) */
+    .design-left2 {
+        width: 80%;
+        height: 500px;
+        /* تم تقليل الارتفاع للموبايل */
+        margin-right: 5px;
+    }
+
+    .design-main-image2 {
+        height: 420px;
+        /* تم تقليل الارتفاع للموبايل */
+    }
+
+    .design-main-image2 img {
+        height: 100%;
+        /* يجب أن تأخذ طول حاويتها */
+    }
+
+    /* أنماط الإصدارات المصغرة */
+    .versions-rows2 {
+        gap: 10px;
+    }
+
+    .versions-row2 {
+        height: 245px;
+        /* تم تعديل الارتفاع للموبايل (نصف الـ 500px تقريباً مع gap) */
+    }
+
+    .version-item2 {
+        max-width: 19%;
+        height: 100%;
+        width: 100%;
+        /* يضمن أن الـ max-width تعمل */
+    }
+
+    .version-image2 {
+        height: 190px;
+        /* تم تقليل ارتفاع الصورة للموبايل */
+    }
+
+    .version-image2 img {
+        height: 100%;
+    }
+
+    .version-name2 {
+        padding: 5px;
+        height: 25px;
+    }
+
+    .version-view-button2 {
+        height: 30px;
+    }
+
+    /* أنماط قسم أسفل التصميم (النص والزر) */
+    .version-text2 {
+        margin-bottom: 17px;
+        font-size: 12px;
+    }
+
+    .version-button2 {
         width: 150px;
-        max-width: 300px;
-        margin-top: 5px;
-        padding: 6px 12px;
-        background-color: var(--accent-color);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 13px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        transition: background-color 0.3s;
+        padding: 6px;
+        font-size: 12px;
     }
-     
-    .version-button2:hover { /* تم التعديل */
-        background-color: #2980b9;
-    }
+}
 
-    /* أنماط الاستجابة للقسم الثاني */
-    @media (max-width: 480px) {
-        .container2 { /* تم التعديل */
-            width: 100%;
-            margin: 0 auto;
-            padding:0 0 ;
-        }
-            
-        /* Header Styles */
-        header {
-            padding-bottom: 40px;
-            padding-top: 50px;
-            width:93%;
-            margin: 0 auto;
-        }
+/* ---------------------------------------------------------------------- */
 
-        header h1 { 
-            margin-bottom: 15px;
-            font-size: 23px;
-            font-weight: 600; 
-        }
+/* ========== أنماط الاستجابة للشاشات الصغيرة جداً (380 بكسل وما دون) ========== */
+@media (max-width: 380px) {
 
-        .welcome-message2 { /* تم التعديل */
-            margin-bottom: 17px;
-            font-size: 17px; 
-        }
-
-        .stats-container2 { /* تم التعديل */
-            gap:10px;
-            padding-bottom: 35px;
-            width:100%;
-        }
-
-        .stat-box2 { /* تم التعديل */
-            padding: 10px;
-            border-radius: 10px; 
-            margin: 0 auto; 
-            min-width: 180px;
-        }
-
-        .stat-box2 h3 { /* تم التعديل */
-            margin-bottom: 10px;
-            font-size: 12px;
-        }
-
-        .stat-box2 .count2 { /* تم التعديل */
-            font-size: 30px;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-         
-        .nav-button2 { /* تم التعديل */
-            width: 80%;
-            padding: 8px 16px;
-            font-size: 14px;  
-        }
-        
-        .nav22 { /* تم التعديل */
-            margin-top: 50px;
-            margin-bottom:   80px;
-        }
-
-        .design-container2 { /* تم التعديل */
-            background:   var(--primary-color);        
-            overflow: hidden;
-            height: 600px; /* تم تقليل الارتفاع في الموبايل */
-            width: 96%;
-            display: flex;
-            flex-direction: row; 
-            cursor: pointer;
-            margin: 0 auto;
-        }
-
-        .design-right2 { /* تم التعديل */
-            width: 20%; /* تم زيادة العرض قليلاً للموبايل */
-            height:  500px; /* تم تقليل الارتفاع للموبايل */
-            display: flex;
-            border-radius:0  10px 10px 0; 
-            flex-direction: column;
-            background-color: #bdc9d2;
-            border:1px solid #e6edee;
-            padding: 0;
-        }
-
-        .design-meta2 { /* تم التعديل */         
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 120px; /* تم تقليل الارتفاع للموبايل */
-        }
-
-        .design-id2 { /* تم التعديل */
-            font-size: 14px;
-            margin-bottom: 8px;
-            width:100%;
-            height:30px; /* تم تقليل الارتفاع للموبايل */
-        }
-        
-        .design-colors-number2 { /* تم التعديل */
-            font-size: 11px;      
-        }
-        
-        .design-button2 { /* تم التعديل */
-            padding: 7px;
-            font-size: 12px;
-            line-height: 1.4;      
-        }
-      
-        .design-main-image2 { /* تم التعديل */
-            height: 420px; /* تم تقليل الارتفاع للموبايل */
-        }
-
-        .design-main-image2 img { /* تم التعديل */
-            width: 100%;
-            height: 100%; /* يجب أن تأخذ طول حاويتها */
-            object-fit: cover;
-        }
-
-        .design-left2 { /* تم التعديل */
-            width: 80%;
-            height: 500px; /* تم تقليل الارتفاع للموبايل */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 0;
-            margin-right:5px;
-        }
-
-        .versions-rows2 { /* تم التعديل */
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .versions-row2 { /* تم التعديل */
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            height: 245px; /* تم تعديل الارتفاع للموبايل (نصف الـ 500px تقريباً مع gap) */
-        }
-
-        .version-item2 { /* تم التعديل */
-            max-width: 19%;
-            height: 100%;
-        }
-
-        .version-image2 { /* تم التعديل */
-            height: 190px; /* تم تقليل ارتفاع الصورة للموبايل */
-        }
-
-        .version-image2 img { /* تم التعديل */
-            height: 100%;
-        }
-
-        .version-name2 { /* تم التعديل */
-            padding: 5px;
-            height: 25px; 
-        }
-        
-        .version-view-button2 { /* تم التعديل */
-            height: 30px; 
-        }
-            
-        .design-id2 { /* تم التعديل */
-            font-size: 13px    
-        }
-        
-        .design-colors-number2 { /* تم التعديل */
-            font-size: 11px;      
-        }
-        
-        .design-button2 { /* تم التعديل */
-            padding: 7px;
-            font-size: 12px;
-            line-height: 1.4;      
-        }
-
-        .version-item2 { /* تم التعديل */
-            width: 100%;
-        }
-        
-        .version-text2 { /* تم التعديل */
-            margin-bottom: 17px;
-            font-size: 12px; 
-        }
-        
-        .version-button2 { /* تم التعديل */
-            width:150px;
-            padding: 6px  ;
-            font-size: 12px;  
-        }
+    /* أنماط الـ Header */
+    header {
+        padding-bottom: 38px;
+        padding-top: 48px;
+        width: 90%;
+        margin: 0 auto;
     }
 
-    @media (max-width: 380px) {
-        /* Header Styles */
-        header {
-            padding-bottom: 38px;
-            padding-top: 48px;
-            width:90%;
-            margin: 0 auto;
-        }
-
-        header h1 { 
-            margin-bottom: 13px;
-            font-size: 21px;
-            font-weight: 600; 
-        }
-
-        .welcome-message2 { /* تم التعديل */
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        .stats-container2 { /* تم التعديل */
-            gap:0;
-            padding-bottom: 33px;
-        }
-
-        .stat-box2 { /* تم التعديل */
-            padding: 8px;
-            border-radius: 8px;
-            margin: 0 18px;
-            min-width: 178px;
-        }
-
-        .stat-box2 h3 { /* تم التعديل */
-            margin-bottom: 8px;
-            font-size: 10px;
-        }
-
-        .stat-box2 .count2 { /* تم التعديل */
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        .nav-button2 { /* تم التعديل */
-            width: 100%;
-            max-width: 198px;
-            padding: 6px 14px;
-            font-size: 12px;
-        }
-        
-        .nav22 { /* تم التعديل */
-            margin-top: 48px;
-            margin-bottom: 78px;
-        }
-        
-        .nav-button2:hover { /* تم التعديل */
-            background-color: #2980b9;
-        }
-        
-        .design-id2 { /* تم التعديل */
-            font-size: 11px    
-        }
-            
-        .design-colors-number2 { /* تم التعديل */
-            font-size: 9px;
-        }
-            
-        .design-button2 { /* تم التعديل */
-            padding: 5px;
-            font-size: 10px;
-            line-height: 1.4; 
-        }
-        
-        .designs-grid2 { /* تم التعديل */
-            gap: 10px;
-        }
-        
-        .version-text2 { /* تم التعديل */
-            margin-bottom: 17px;
-            font-size: 12px; 
-        }
-        
-        .version-button2 { /* تم التعديل */
-            width: 80%;
-            padding: 4px 8px;
-            font-size: 11px;  
-        }
+    header h1 {
+        margin-bottom: 13px;
+        font-size: 21px;
     }
+
+    .welcome-message2 {
+        margin-bottom: 15px;
+        font-size: 15px;
+    }
+
+    /* أنماط إحصائيات لوحة التحكم */
+    .stats-container2 {
+        gap: 0;
+        padding-bottom: 33px;
+    }
+
+    .stat-box2 {
+        padding: 8px;
+        border-radius: 8px;
+        margin: 0 18px;
+        min-width: 178px;
+    }
+
+    .stat-box2 h3 {
+        margin-bottom: 8px;
+        font-size: 10px;
+    }
+
+    .stat-box2 .count2 {
+        font-size: 28px;
+    }
+
+    /* أنماط زر التنقل */
+    .nav-button2 {
+        width: 100%;
+        max-width: 198px;
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+
+    .nav22 {
+        margin-top: 48px;
+        margin-bottom: 78px;
+    }
+
+    /* أنماط شبكة التصاميم (Design Grid) */
+    .designs-grid2 {
+        gap: 10px;
+    }
+
+    /* أنماط القسم الأيمن (الميتا) */
+    .design-id2 {
+        font-size: 11px;
+    }
+
+    .design-colors-number2 {
+        font-size: 9px;
+    }
+
+    .design-button2 {
+        padding: 5px;
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    /* أنماط قسم أسفل التصميم (النص والزر) */
+    .version-text2 {
+        margin-bottom: 17px;
+        font-size: 12px;
+    }
+
+    .version-button2 {
+        width: 80%;
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+}
