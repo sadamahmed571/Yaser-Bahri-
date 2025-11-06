@@ -1153,15 +1153,15 @@ header h1 {
     .designs-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 5px;
+        gap: 10px;
         width:94%;
-        margin: 0 auto;
+        
     }
 
     .design-container {
         height: 380px;
         width:105px;
-        margin-top: 30px;
+        margin: 0 auto;
     }
 
     .design-image img {
