@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختيار الوان النقشات</title>
     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" type="text/css" href="coloris.min.css">
+    
 </head>
 <style>
  
@@ -20,11 +22,11 @@
             <div class="stats-container">
                 <div class="stat-box">
                     <h3>📊 التصاميم الجاهزة بدون الوان</h3>
-                    <div class="count" id="ready-count">0</div>
+                    <div class="count" >15</div>
                 </div>
                 <div class="stat-box">
                     <h3>✅ التصاميم الجاهزة كلياً</h3>
-                    <div class="count" id="completed-count">0</div>
+                    <div class="count" >0</div>
                 </div>
             </div>
             
@@ -623,19 +625,19 @@
             <div class="color-palette" id="color-palette">
                 </div>
             <div class="color-picker-container">
-                <button class="nav-button" id="custom-color-btn">اختيار لون مخصص للخلفية</button>
-                <input type="color" id="custom-color-picker" class="color-picker-input" style="display: none;">
+                <button class="nav-button background-nav" id="custom-color-btn">اختيار لون مخصص للخلفية</button>
+                <input type="text" id="custom-color-picker" class="color-picker-input" style="display: none;" data-coloris>
             </div>
 
             <div class="pattern-color-controls">
               
                 <div class="color-control-item">
                     <label for="border-color-picker">لون الحاشية:</label>
-                    <input type="color" id="border-color-picker" value="#000000" class="color-picker-input">
+                    <input type="text" id="border-color-picker" value="#000000" class="color-picker-input" inputmode="none" data-coloris>
                 </div>
                 <div class="color-control-item">
                     <label for="pattern-color-picker">لون النقشة:</label>
-                    <input type="color" id="pattern-color-picker" value="#000000" class="color-picker-input">
+                    <input type="text"inputmode="none" id="border-color-picker" value="#000000" class="color-picker-input" data-coloris>
                 </div>
             </div>
             </div>
@@ -643,26 +645,12 @@
             <img id="assistant-preview-image" src="backgrounds/1.png" alt="معاينة الصورة">
         </div>
     </div>
-    <button class="confirm-background-btn" id="confirm-background-btn">تأكيد لون الخلفية وارساله</button>
+    <button class="confirm-background-btn" id="confirm-background-btn">تأكيد الاختيارات و ارسالها</button>
 </section>
 
- <!-- زر فتح منتقي الألوان 
-    <button id="openColorPicker">🎨 اختر لونًا</button>
 
-    <!-- نافذة منبثقة 
-    <div id="colorPickerModal" class="color-picker-modal">
-        <div class="color-picker-container">
-            <div id="picker" class="picker-container">
-                <!-- سيتم إضافة منتقي الألوان هنا ديناميكيًا 
-            </div>
-            <!-- زر التأكيد
-            <button id="confirmColorBtn"><p class="picker-button">تأكيد اللون</p></button>
-        </div>
-    </div> -->
-
-    <script>
-
-    </script>
+     <script type="text/javascript" src="coloris.min.js"></script>
+    
     <script src="script.js"></script>
 	<script src="color-picker.js"></script>
 <script src="auto-save.js"></script>

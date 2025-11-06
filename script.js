@@ -14,7 +14,7 @@ const WHATSAPP_NUMBER = '+967777967272'; // رقم الواتساب المسته
 let currentDesignId = null; // لتتبع رقم التصميم الحالي (1 إلى 60)
 
 // قائمة الأحرف للإصدارات (a, b, c, ...)
-const VERSIONS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+const VERSIONS = ['-1', '-2', '-3', '-4', '-5', '-6', '-7', '-8', '-9', '-10'];
 
 // عند تحميل الصفحة، نجهز كل شيء
 document.addEventListener('DOMContentLoaded', () => {
@@ -139,7 +139,7 @@ function initializeColorPickers() {
     document.querySelectorAll('.color-button').forEach(button => {
         button.addEventListener('click', (e) => {
             const buttonType = e.target.dataset.type; // 'background', 'pattern', 'edges'
-            const versionId = e.target.closest('.version-container').dataset.version; // '1-a', '1-b', ...
+            const versionId = e.target.closest('.version-container').dataset.version; // '1-1', '1-2', ...
 
             colorInput.click(); // فتح منتقي الألوان الأصلي
 
@@ -174,7 +174,7 @@ function collectDesignData() {
     document.querySelectorAll('.version-container').forEach(versionContainer => {
         // نأخذ الجزء الثاني من data-version ليكون هو مفتاح الإصدار (a, b, c, ...)
         const fullVersion = versionContainer.dataset.version; 
-        const version = fullVersion.split('-')[1]; // مثال: من '1-a' نأخذ 'a'
+        const version = fullVersion.split('-')[1]; // مثال: من '1-1' نأخذ 'a'
 
         const backgroundCode = versionContainer.querySelector(`.color-display[data-type="background"] .color-code`).dataset.color || versionContainer.querySelector(`.color-display[data-type="background"] .color-code`).textContent;
         const patternCode = versionContainer.querySelector(`.color-display[data-type="pattern"] .color-code`).dataset.color || versionContainer.querySelector(`.color-display[data-type="pattern"] .color-code`).textContent;
