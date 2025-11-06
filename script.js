@@ -343,7 +343,7 @@ function updateHeaderCounters() {
     const completedElement = document.getElementById('completed-count');
     
     // افتراضاً: "جاهزة بدون ألوان" = الإجمالي (60) - (المختارة + المرسلة)
-    const totalDesigns = 60; // يجب التأكد من العدد الحقيقي
+    const totalDesigns = 16; // يجب التأكد من العدد الحقيقي
     const unselectedCount = totalDesigns - selectedCount - sentCount;
     
     if (readyElement) readyElement.textContent = unselectedCount > 0 ? unselectedCount : 0;
