@@ -126,7 +126,7 @@ header h1 {
     border-radius: 8px;
     border: 2px dashed #e6edee;
     overflow: hidden;
-    height: 500px;
+    height: 392px;
     width: 100px;
     display: flex;
     flex-direction: column;
@@ -142,8 +142,8 @@ header h1 {
 }
 
 .design-image img {
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 292px;
     object-fit: cover;
 }
 
@@ -154,6 +154,7 @@ header h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+	height: 100px;
 }
 
 .design-id {
@@ -204,16 +205,16 @@ header h1 {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
+    z-index: 1100;
     overflow-y: auto;
 }
 
 .modal-content {
     background-color: #e8ecf2;
     padding-bottom: 40px;
+    min-width: 100%;
     width: 460px;
-    max-width: 100%;
-    margin: 20px auto;
+     margin: 20px auto;
     border-radius: 8px;
     overflow-y: auto;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -222,7 +223,7 @@ header h1 {
 .modal-header {
     background-color: var(--primary-color);
     color: #b8b191;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
     font-size: 1.3rem;
     font-weight: 800;
@@ -251,10 +252,11 @@ header h1 {
     display: flex;
     flex-direction: row;
     min-height: 600px;
+	z-index:2000;
 }
 
 .color-versions {
-    width: 410px;
+    width: 420px;
     padding-bottom: 10px;
     overflow-y: auto;
 }
@@ -271,15 +273,16 @@ header h1 {
 
 .version-header {
     font-weight: bold;
-    padding: 8px;
+    padding: 4px;
     border-radius: 0 10px 10px 0;
     border: none;
-    font-size: 17px;
+    font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: var(--accent-color);
     color: #fff;
+	max-width: 45px;
 }
 
 .colors-container {
@@ -293,11 +296,16 @@ header h1 {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 0;
+    max-width:300px;
 }
 
 .color-button {
-    padding: 4px 4px;
+    justify-content: center;
+	 align-items: center;
+	 text-align: center;
+    min-height:   23px;
     background-color: #bbd9fc;
+	 display: flex;
     color: #000;
     border: none;
     border-radius: 8px 0 0 8px;
@@ -312,7 +320,7 @@ header h1 {
     flex-direction: row;
     /* جعلها صفوف مثل الأزرار */
     justify-content: space-between;
-    margin-top: 3px;
+    margin-top: 0;
 }
 
 .color-display {
@@ -339,7 +347,7 @@ header h1 {
 }
 
 .design-preview {
-    min-width: 100px;
+     width: 100px;
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -417,6 +425,7 @@ header h1 {
     border-top: 2px solid #e9ecef;
     margin-top: 15px;
     width: 100%;
+	 padding-bottom: 60px;
 }
 
 .action-button {
@@ -494,9 +503,9 @@ header h1 {
 }
 
 /* الحاوية */
-.modal-content {
+.modal-content2 {
     background-color: white;
-    padding: 15px;
+    padding: 0;
     border-radius: 8px;
     max-width: 380px;
     max-height: 600px;
@@ -505,7 +514,7 @@ header h1 {
 }
 
 /* الصورة */
-.modal-content img {
+.modal-content2 img {
     max-width: 350px;
     max-height: 550px;
     width: auto;
@@ -562,7 +571,7 @@ header h1 {
 
 /* قسم مساعد تلوين الخلفيات */
 .backgrounds-section {
-    width: 96%;
+    width: 95%;
     margin: 0 auto;
     padding-bottom: 90px;
     background-color: var(--primary-color);
@@ -580,29 +589,35 @@ header h1 {
     margin: 0 auto;
     gap: 10px;
     width: 90%;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .backgrounds-control {
-    flex: 1;
+    display: flex;
+	flex-direction:row;
     background-color: var(--secondary-color);
-    padding: 5px;
-    border-radius: 5px;
+    padding: 15px;
+    border-radius: 10px 10px 0 0 ;
     text-align: center;
+	width:100%;
+	justify-content:center;
+	align-items:center;
+	gap:20px;
 }
 
 .backgrounds-control h3 {
-    margin-bottom: 10px;
-    font-size: 12px;
+    font-size: 16px;
     color: #bbd9fc;
+	font-weight:800;
 }
 
 .backgrounds-control select {
-    width: 90%;
-    padding: 5px;
+    width:30%;
+    padding: 3px;
     border-radius: 4px;
     border: 1px solid #416c89;
     background-color: #ecf0f1;
+	 font-size: 16px;
 }
 
 .backgrounds-content {
@@ -610,10 +625,12 @@ header h1 {
     height: 60vh;
     gap: 5px;
     margin-bottom: 30px;
+
 }
 
 .color-panel {
-    width: 400px;
+    max-width: 480px;
+	width:100%;
     background-color: var(--secondary-color);
     padding: 15px;
     border-radius: 0 20px 20px 0;
@@ -633,60 +650,59 @@ header h1 {
     display: none;
 }
 
-.color-buttons {
+.color-buttons2 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 0;
+    gap: 5px;
     margin-bottom: 3px;
     padding-bottom: 3px;
 }
 
-.color-button {
-    max-width: 25px;
+.color-button2 {
     width: 100%;
-    height: 12px;
-    border: none;
+	min-width: 11px;
+    height: 14px;
+    border: 1px double #969aa3 ;
     border-radius: 3px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.color-button:hover {
+.color-button2:hover {
     transform: scale(1.1);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
 }
 
-.color-button.selected {
+.color-button2.selected {
     transform: scale(1.1);
     box-shadow: 0 0 0 1px white, 0 0 0 2px #3498db;
 }
 
 .color-palette {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .color-picker {
     margin-top: 20px;
 }
-
-/* تنسيقات حقول ألوان النقشة المضافة حديثًا */
+ 
 .pattern-color-controls {
-    /* يجعل الحاوية منفصلة وواضحة ضمن لوحة الألوان */
+ 
     padding: 10px 0;
     margin-top: 15px;
     border-top: 1px solid #3c5d79;
-    /* خط فاصل خفيف */
+      justify-content:center;
+	  align-items:center;
     text-align: right;
     display: flex;
     flex-direction: row;
     gap: 40px;
 }
 
-.pattern-color-controls h3 {
-    /* تنسيق عنوان "اختيار الوان النقشة" */
-    margin-bottom: 15px;
-    font-size: 14px;
+.pattern-color-controls h3 { 
+    margin-top:  5px;
+    font-size: 15px;
     color: var(--accent-color);
     /* يمكن استخدام لون مميز هنا */
     text-align: center;
@@ -697,12 +713,12 @@ header h1 {
     justify-content: space-between;
     /* توزيع العناصر على الجانبين */
     align-items: center;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .color-control-item label {
     /* تنسيق النص (لون الحاشية/لون النقشة) */
-    font-size: 13px;
+    font-size: 14px;
     color: #bbd9fc;
     flex-grow: 1;
     /* للسماح للنص بأخذ المساحة اللازمة */
@@ -714,7 +730,7 @@ header h1 {
     /* تنسيق حقل اختيار اللون نفسه (input[type="color"]) */
     width: 60px;
     /* حجم مناسب للحقل */
-    height: 30px;
+    height: 25px;
     padding: 0;
     border: 2px solid #5d8aa7;
     border-radius: 5px;
@@ -723,7 +739,7 @@ header h1 {
 }
 
 .image-display {
-    width: 135px;
+    width: 100px;
     height: 100%;
     background-color: var(--secondary-color);
     border-radius: 20px 0 0 20px;
@@ -734,7 +750,7 @@ header h1 {
 }
 
 .image-display img {
-    width: 165px;
+     min-width:100px;
     height: auto;
     max-height: 100%;
     z-index: 1001;
@@ -743,14 +759,14 @@ header h1 {
 .confirm-background-btn {
     display: block;
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
     margin: 0 auto;
     padding: 12px 20px;
     background-color: var(--accent-color);
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     text-align: center;
     transition: background-color 0.3s;
@@ -1127,20 +1143,25 @@ header h1 {
 /* ---------------------------------------------------------------------- */
 /* ========== أنماط الاستجابة للشاشات الصغيرة جدًا (480 بكسل وما دون) ========== */
 @media (max-width: 480px) {
+     .container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 0;
+    }
 
     /* Designs Grid Styles */
     .designs-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-        width:100%;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        width:97%;
         margin: 0 auto;
     }
 
     .design-container {
         height: 380px;
-        width:95px;
-        margin: 0 auto;
+        width:105px;
+        margin-top: 30px;
     }
 
     .design-image img {
@@ -1150,7 +1171,7 @@ header h1 {
     }
 
     .design-id {
-        font-size: 13px    
+        font-size: 11px    
     }
 	
     .design-colors-number {
@@ -1165,26 +1186,7 @@ header h1 {
 
  
     /* Color Selection Modal */
-    .color-modal {
-        width: 100%;
-        height: 100%;		
-    }
-
-    .modal-content {
-        padding-bottom: 30px;
-        width: 460px;
-        max-width: 100%;
-        margin: 20px auto;       
-    }
-
-    .modal-header {
-        padding: 20px;
-        font-size: 19px ;        
-    }
- 
-.close-button {
-    font-size: 27px;
-}
+   
 
     .color-versions {
         width: 410px;
@@ -1199,7 +1201,7 @@ header h1 {
 
     .version-header {
         padding: 7px;
-        font-size: 15px;
+        font-size: 5px;
     }
     .color-button {
         padding: 3px 3px;
@@ -1441,6 +1443,172 @@ header h1 {
         padding: 6px;
         font-size: 12px;
     }
+	
+	
+/* قسم مساعد تلوين الخلفيات */
+.backgrounds-section {
+    width: 96%;
+  
+    min-height: 500px;
+}
+
+.backgrounds-header {
+    margin-bottom: 5px;
+}
+
+.backgrounds-controls {
+    gap: 5px;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.backgrounds-control {
+    padding: 10px;
+    border-radius: 10px  ;
+	gap:10px;
+}
+
+.backgrounds-control h3 {
+    font-size: 14px;   
+}
+
+.backgrounds-control select {
+    width:30%;
+    padding: 3px;
+	 font-size: 14px;
+}
+
+.backgrounds-content {
+    display: flex;
+    height: 65vh;
+    gap: 5px;
+    margin-bottom: 30px;
+
+}
+
+.color-panel {
+    max-width: 100%;
+	width:325px;
+    padding: 10px;
+}
+
+.color-panel h3 {
+    margin-bottom: 13px;  
+}
+
+.color-group h4 {
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 12px;
+    text-align: right;
+    display: none;
+}
+
+.color-buttons2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+}
+
+.color-button2 {
+    width: 100%;
+	max-width: 15px;
+    height: 15px;
+    border: 1px double #969aa3 ;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+ 
+ 
+.pattern-color-controls {
+ 
+    padding: 5px 0;
+    margin-top: 25px;
+    border-top: 1px solid #3c5d79;
+      justify-content:center;
+	  align-items:center;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.pattern-color-controls h3 { 
+    margin-top:  15px;
+    font-size: 13px;
+    color: var(--accent-color);
+    /* يمكن استخدام لون مميز هنا */
+    text-align: center;
+}
+
+.color-control-item {
+    display: flex;
+    justify-content: space-between;
+    /* توزيع العناصر على الجانبين */
+    align-items: center;
+    margin-top: 15px;
+}
+
+.color-control-item label {
+    /* تنسيق النص (لون الحاشية/لون النقشة) */
+    font-size: 14px;
+    color: #bbd9fc;
+    flex-grow: 1;
+    /* للسماح للنص بأخذ المساحة اللازمة */
+    padding-left: 10px;
+    /* مسافة عن اليمين */
+}
+
+.color-control-item .color-picker-input {
+    /* تنسيق حقل اختيار اللون نفسه (input[type="color"]) */
+    width: 40px;
+    /* حجم مناسب للحقل */
+    height: 25px;
+    padding: 0;
+    border: 2px solid #5d8aa7;
+    border-radius: 5px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.image-display {
+    width: 80px;
+    height: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-display img {
+     min-width:100px;
+    height: auto;
+    max-height: 100%;
+    z-index: 1001;
+}
+
+.confirm-background-btn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
 }
 
 /* ---------------------------------------------------------------------- */

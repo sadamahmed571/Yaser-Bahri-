@@ -1,3 +1,4 @@
+ 
 // ====== الإعدادات والمتغيرات الأساسية ======
 const DESIGNS_CONTAINER_ID = 'designs-grid'; // الحاوية الرئيسية للتصاميم
 const COLOR_MODAL_ID = 'color-modal'; // الحاوية المنبثقة لاختيار الألوان
@@ -31,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 5. تحديث حالة أزرار "قم بالتلوين" في الواجهة الرئيسية
     updateAllDesignButtonsStatus();
+
+    // 6. تفعيل نوافذ معاينة الصور
+    initializePreviewModals();
 });
 
 // ==========================================================
@@ -345,3 +349,52 @@ function updateHeaderCounters() {
     if (readyElement) readyElement.textContent = unselectedCount > 0 ? unselectedCount : 0;
     if (completedElement) completedElement.textContent = sentCount;
 }
+
+// ==========================================================
+// 6. وظائف تفعيل نوافذ معاينة الصور
+// ==========================================================
+
+function initializePreviewModals() {
+    // إخفاء النوافذ عند التحميل
+    document.getElementById('image-preview-modal').style.display = 'none';
+    document.getElementById('version-preview-modal').style.display = 'none';
+
+    // أزرار معاينة النقشات الأصلية (preview-btn)
+    document.querySelectorAll('.preview-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const container = e.target.closest('.design-container');
+            const imgSrc = container.querySelector('.design-image img').src;
+            document.getElementById('previewed-image').src = imgSrc;
+            document.getElementById('image-preview-modal').style.display = 'flex';
+        });
+    });
+
+    // أزرار معاينة الإصدارات الملونة (version-view-button2)
+    document.querySelectorAll('.version-view-button2').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const item = e.target.closest('.version-item2');
+            const imgSrc = item.querySelector('.version-image2 img').src;
+            document.getElementById('version-previewed-image').src = imgSrc;
+            document.getElementById('version-preview-modal').style.display = 'flex';
+        });
+    });
+
+    // إغلاق النوافذ عند النقر على زر الإغلاق (close-preview)
+    document.querySelectorAll('.close-preview').forEach(closeBtn => {
+        closeBtn.addEventListener('click', () => {
+            document.getElementById('image-preview-modal').style.display = 'none';
+            document.getElementById('version-preview-modal').style.display = 'none';
+        });
+    });
+
+    // إغلاق النوافذ عند النقر خارج المحتوى (اختياري لتحسين التجربة)
+    window.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('image-preview-modal')) {
+            document.getElementById('image-preview-modal').style.display = 'none';
+        }
+        if (e.target === document.getElementById('version-preview-modal')) {
+            document.getElementById('version-preview-modal').style.display = 'none';
+        }
+    });
+}
+ 

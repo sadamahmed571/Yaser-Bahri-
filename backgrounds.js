@@ -279,11 +279,11 @@ function createColorPalette() {
         groupDiv.appendChild(groupTitle);
 
         const buttonsContainer = document.createElement('div');
-        buttonsContainer.className = 'color-buttons';
+        buttonsContainer.className = 'color-buttons2';
 
         fabricColorPalette[colorGroup].forEach(color => {
             const colorButton = document.createElement('button');
-            colorButton.className = 'color-button';
+            colorButton.className = 'color-button2';
             colorButton.style.backgroundColor = color;
             colorButton.dataset.color = color;
 
@@ -305,12 +305,12 @@ function selectColor(color) {
     imageDisplay.style.backgroundColor = color;
 
     // إزالة التحديد من جميع الأزرار
-    document.querySelectorAll('.color-button').forEach(btn => {
+    document.querySelectorAll('.color-button2').forEach(btn => {
         btn.classList.remove('selected');
     });
 
     // إضافة التحديد للزر المختار
-    const selectedButton = document.querySelector(`.color-button[data-color="${color}"]`);
+    const selectedButton = document.querySelector(`.color-button2[data-color="${color}"]`);
     if (selectedButton) {
         selectedButton.classList.add('selected');
     }
