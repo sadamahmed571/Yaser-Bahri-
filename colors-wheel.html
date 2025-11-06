@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة تسجيل الدخول</title>
+	 <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="color-picker.css">
+    <style>
+    
+        #openColorPicker {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        #openColorPicker:hover {
+            background-color: #3a7bc8;
+        }
+
+        .color-picker-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color:rgba(53, 53, 53, 0.82);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .color-picker-container {
+            background : none;
+            border-radius: 12px;
+            padding: 24px;
+            width: 320px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .color-picker-row {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .pointer {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 2px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+
+        .slider-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 40px;
+        }
+
+        .slider-label {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 200px;
+            width: 30px;
+            background: linear-gradient(to bottom, #ffffff, #000000);
+            border-radius: 15px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-pointer {
+            position: absolute;
+            left: 50%;
+            width: 36px;
+            height: 8px;
+            background-color: white;
+            border: 2px solid #888;
+            border-radius: 4px;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .color-display-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .color-display {
+            font-family: monospace;
+            font-size: 18px;
+            padding: 8px 16px;
+            background-color: #f0f0f0;
+            border-radius: 6px;
+            min-width: 100px;
+        }
+       .picker-button {
+	    margin-bottom: 10px;
+       font-size: 15px;
+	   font-weight:800;
+       color: #000;
+ 
+	    }
+		.border-webkit{
+  -webkit-text-stroke: 3px red;
+}
+.picker-button{
+  /*border white with light shadow*/
+  text-shadow: 
+     1px  1px     #fff, 
+    -1px  1px     #fff, 
+     1px -1px     #fff, 
+    -1px -1px     #fff,
+     1px  1px 5px #555;
+}
+        #confirmColorBtn {
+            background-color: #4a90e2;
+            color: white;
+            border: 1px solid #000;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #confirmColorBtn:hover {
+            background-color: #3a7bc8;
+        }   
+
+    </style>
+</head>
+<body>
+    <!-- زر فتح منتقي الألوان -->
+    <button id="openColorPicker">🎨 اختر لونًا</button>
+
+    <!-- نافذة منبثقة -->
+    <div id="colorPickerModal" class="color-picker-modal">
+        <div class="color-picker-container">
+            <div id="picker" class="picker-container">
+                <!-- سيتم إضافة منتقي الألوان هنا ديناميكيًا -->
+            </div>
+            <!-- زر التأكيد -->
+            <button id="confirmColorBtn"><p class="picker-button">تأكيد اللون</p></button>
+        </div>
+    </div>
+
+    <script>
+        // عناصر DOM
+        const openBtn = document.getElementById('openColorPicker');
+        const modal = document.getElementById('colorPickerModal');
+        const pickerElement = document.getElementById('picker');
+        const confirmBtn = document.getElementById('confirmColorBtn');
+
+        let selectedColor = '#e7e7e7'; // اللون الافتراضي
+        let colorPicker = null;
+        let baseColor = '#ff0000'; // اللون الأساسي المختار من العجلة
+
+        // فتح النافذة المنبثقة
+        openBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            
+            // إذا لم يتم تهيئة منتقي الألوان بعد، قم بتهيئته
+            if (!colorPicker) {
+                initColorPicker();
+            }
+        });
+
+        // إغلاق النافذة عند الضغط خارج الحاوية
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // عند الضغط على زر التأكيد
+        confirmBtn.addEventListener('click', () => {
+            console.log('تم اختيار اللون:', selectedColor);
+            modal.style.display = 'none';
+        });
+
+        // دالة لتهيئة منتقي الألوان
+        function initColorPicker() {
+            // إنشاء عناصر منتقي الألوان
+            const colorPickerRow = document.createElement('div');
+            colorPickerRow.className = 'color-picker-row';
+            
+            const canvasContainer = document.createElement('div');
+            canvasContainer.className = 'canvas-container';
+            
+            const canvas = document.createElement('canvas');
+            canvas.className = 'canvas';
+            canvas.width = 200;
+            canvas.height = 200;
+            
+            const pointer = document.createElement('div');
+            pointer.className = 'pointer';
+            
+            // إنشاء حاوية شريط السطوع مع التسمية
+            const sliderWrapper = document.createElement('div');
+            sliderWrapper.className = 'slider-wrapper';
+            
+            const sliderLabel = document.createElement('div');
+            sliderLabel.className = 'slider-label';
+            sliderLabel.textContent = 'درجة التعتيم';
+            
+            const sliderContainer = document.createElement('div');
+            sliderContainer.className = 'slider-container';
+            
+            const slider = document.createElement('div');
+            slider.className = 'slider';
+            
+            const sliderPointer = document.createElement('div');
+            sliderPointer.className = 'slider-pointer';
+            
+            const colorDisplayContainer = document.createElement('div');
+            colorDisplayContainer.className = 'color-display-container';
+            
+            const colorDisplay = document.createElement('div');
+            colorDisplay.className = 'color-display';
+            colorDisplay.textContent = selectedColor;
+            
+            // إضافة العناصر إلى DOM
+            canvasContainer.appendChild(canvas);
+            canvasContainer.appendChild(pointer);
+            
+            sliderContainer.appendChild(slider);
+            sliderContainer.appendChild(sliderPointer);
+            
+            sliderWrapper.appendChild(sliderLabel);
+            sliderWrapper.appendChild(sliderContainer);
+            
+            colorPickerRow.appendChild(canvasContainer);
+            colorPickerRow.appendChild(sliderWrapper);
+            
+            colorDisplayContainer.appendChild(colorDisplay);
+            
+            pickerElement.appendChild(colorPickerRow);
+            pickerElement.appendChild(colorDisplayContainer);
+            
+            // الحصول على سياق الرسم
+            const ctx = canvas.getContext('2d');
+            
+            // رسم عجلة الألوان
+            drawColorWheel(ctx, canvas.width, canvas.height);
+            
+            // وضع المؤشر في المنتصف في البداية
+            pointer.style.left = (canvas.width / 2) + 'px';
+            pointer.style.top = (canvas.height / 2) + 'px';
+            
+            // وضع مؤشر السطوع في الأعلى (أقصى سطوع)
+            sliderPointer.style.top = '0px';
+            
+            // تحديث شريط السطوع باللون الأساسي
+            updateBrightnessSlider(baseColor);
+            
+            // إضافة مستمعات الأحداث
+            let isDragging = false;
+            
+            canvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                updateColorFromCanvas(e, canvas, pointer, colorDisplay, sliderPointer, ctx);
+            });
+            
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    updateColorFromCanvas(e, canvas, pointer, colorDisplay, sliderPointer, ctx);
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            sliderContainer.addEventListener('mousedown', (e) => {
+                updateBrightness(e, sliderContainer, sliderPointer, colorDisplay);
+            });
+            
+            sliderContainer.addEventListener('mousemove', (e) => {
+                if (e.buttons === 1) { // إذا كان زر الماوس مضغوطًا
+                    updateBrightness(e, sliderContainer, sliderPointer, colorDisplay);
+                }
+            });
+        }
+        
+        // دالة لرسم عجلة الألوان
+        function drawColorWheel(ctx, width, height) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(centerX, centerY) - 5;
+            
+            for (let angle = 0; angle < 360; angle += 1) {
+                const startAngle = (angle - 2) * Math.PI / 180;
+                const endAngle = angle * Math.PI / 180;
+                
+                // إنشاء تدرج لوني دائري
+                const gradient = ctx.createRadialGradient(
+                    centerX, centerY, 0,
+                    centerX, centerY, radius
+                );
+                
+                const hue = angle;
+                gradient.addColorStop(0, 'white');
+                gradient.addColorStop(0.7, `hsl(${hue}, 100%, 50%)`);
+                gradient.addColorStop(1, 'black');
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
+        }
+        
+        // دالة لتحديث اللون بناءً على موضع المؤشر على العجلة
+        function updateColorFromCanvas(e, canvas, pointer, colorDisplay, sliderPointer, ctx) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // التأكد من أن المؤشر يبقى داخل Canvas
+            if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) return;
+            
+            // تحديث موضع المؤشر
+            pointer.style.left = x + 'px';
+            pointer.style.top = y + 'px';
+            
+            // الحصول على بيانات البكسل من موقع المؤشر
+            const pixelData = ctx.getImageData(x, y, 1, 1).data;
+            
+            // حفظ اللون الأساسي
+            baseColor = rgbToHex(pixelData[0], pixelData[1], pixelData[2]);
+            
+            // تحديث شريط السطوع باللون الجديد
+            updateBrightnessSlider(baseColor);
+            
+            // حساب اللون النهائي مع السطوع
+            const brightness = calculateBrightness(sliderPointer);
+            selectedColor = applyBrightness(baseColor, brightness);
+            
+            // تحديث عرض اللون
+            colorDisplay.textContent = selectedColor;
+            
+            // تحديث لون زر التأكيد
+            confirmBtn.style.background = selectedColor;
+        }
+        
+        // دالة لتحديث السطوع
+        function updateBrightness(e, sliderContainer, sliderPointer, colorDisplay) {
+            const rect = sliderContainer.getBoundingClientRect();
+            let y = e.clientY - rect.top;
+            
+            // التأكد من أن المؤشر يبقى داخل الشريط
+            y = Math.max(0, Math.min(y, rect.height - 8));
+            
+            // تحديث موضع مؤشر السطوع
+            sliderPointer.style.top = y + 'px';
+            
+            // حساب عامل السطوع
+            const brightness = calculateBrightness(sliderPointer);
+            
+            // تطبيق عامل السطوع على اللون الأساسي
+            selectedColor = applyBrightness(baseColor, brightness);
+            
+            // تحديث عرض اللون
+            colorDisplay.textContent = selectedColor;
+            
+            // تحديث لون زر التأكيد
+            confirmBtn.style.background = selectedColor;
+        }
+        
+        // دالة لتحديث شريط السطوع بلون جديد
+        function updateBrightnessSlider(color) {
+            const sliderContainer = document.querySelector('.slider-container');
+            sliderContainer.style.background = `linear-gradient(to bottom, ${color}, #000000)`;
+        }
+        
+        // دالة لحساب قيمة السطوع من موضع المؤشر
+        function calculateBrightness(sliderPointer) {
+            const sliderRect = sliderPointer.parentElement.getBoundingClientRect();
+            const pointerY = parseFloat(sliderPointer.style.top || '0');
+            const sliderHeight = sliderRect.height;
+            
+            // قيمة السطوع من 1 (كامل السطوع) إلى 0 (أسود)
+            return 1 - (pointerY / (sliderHeight - 8));
+        }
+        
+        // دالة لتطبيق السطوع على اللون
+        function applyBrightness(color, brightness) {
+            // تحويل HEX إلى RGB
+            const r = parseInt(color.substr(1, 2), 16);
+            const g = parseInt(color.substr(3, 2), 16);
+            const b = parseInt(color.substr(5, 2), 16);
+            
+            // تطبيق عامل السطوع
+            const adjustedR = Math.round(r * brightness);
+            const adjustedG = Math.round(g * brightness);
+            const adjustedB = Math.round(b * brightness);
+            
+            // تحويل RGB إلى HEX
+            return rgbToHex(adjustedR, adjustedG, adjustedB);
+        }
+        
+        // دالة لتحويل RGB إلى HEX
+        function rgbToHex(r, g, b) {
+            // تأكد من أن القيم ضمن النطاق الصحيح
+            r = Math.max(0, Math.min(255, r));
+            g = Math.max(0, Math.min(255, g));
+            b = Math.max(0, Math.min(255, b));
+            
+            // تحويل إلى HEX مع إضافة صفر بادئ إذا لزم الأمر
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+        }
+    </script>
+	<script src="color-picker.js"></script>
+</body>
+</html>
