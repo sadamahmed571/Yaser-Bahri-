@@ -275,7 +275,7 @@ function sendToWhatsApp() {
     if (!currentDesignId) return;
     
     const designData = collectDesignData();
-    let messageText = `عزيزي المصمم المبدع صدام .. قم بأعتماد هذه الالوان للتصميم رقم (${currentDesignId}) : \n\n_________________\n`;
+    let messageText = ` عزيزي المصمم المبدع صدام ، انيك عار الذي يكرهك .. قم بأعتماد هذه الالوان للتصميم رقم (${currentDesignId}) : \n\n_________________\n`;
 
     // بناء نص الرسالة بالتنسيق المطلوب
     for (const [version, colors] of Object.entries(designData)) {
@@ -397,4 +397,5 @@ function initializePreviewModals() {
         }
     });
 }
+
  
