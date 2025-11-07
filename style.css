@@ -1157,7 +1157,8 @@ header h1 {
         width:94%;
         margin: 0 auto;
     }
-  
+
+  
     .design-container {
         height: 380px;
         width:105px;
@@ -1590,8 +1591,9 @@ header h1 {
 .image-display img {
      min-width:100px;
     height: auto;
-    max-height: 100%;
+    min-height: 100%;
     z-index: 1001;
+	opacity:90%;
 }
 
 .confirm-background-btn {
@@ -1707,4 +1709,5 @@ header h1 {
         padding: 4px 8px;
         font-size: 11px;
     }
+
 }
