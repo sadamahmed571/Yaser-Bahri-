@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   position: absolute;
   width: 200px;
-  z-index: 1000;
+  z-index: 1100;
   border-radius: 10px;
   background-color: #fff;
   justify-content: flex-end;
@@ -17,7 +17,6 @@
 .clr-picker.clr-open,
 .clr-picker[data-inline="true"] {
   display: flex;
-  z-index:2000;
 }
 
 .clr-picker[data-inline="true"] {
