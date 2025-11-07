@@ -17,6 +17,7 @@
 .clr-picker.clr-open,
 .clr-picker[data-inline="true"] {
   display: flex;
+  z-index:2000;
 }
 
 .clr-picker[data-inline="true"] {
