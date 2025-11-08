@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة تسجيل الدخول</title>
+	  <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS بسيط للتنسيق */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: right; /* لمحاذاة النص والوسم لليمين */
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* للتأكد أن padding لا يزيد من عرض العنصر */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none; /* يتم إظهاره عبر جافاسكريبت */
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>تسجيل الدخول</h2>
+
+    <form id="loginForm">
+        
+        <div class="input-group">
+            <label for="password">كلمة المرور:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">تسجيل الدخول</button>
+        <p class="error-message" id="errorMessage">كلمة المرور خاطئة!</p>
+    </form>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        // نمنع الإرسال الافتراضي للفورم
+        event.preventDefault();
+
+        // كلمة المرور الصحيحة المطلوبة
+        const correctPassword = "77108181377";
+        
+        // الحصول على كلمة المرور التي أدخلها المستخدم
+        const enteredPassword = document.getElementById('password').value;
+        
+        // الحصول على عنصر رسالة الخطأ
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (enteredPassword === correctPassword) {
+            // إذا كانت كلمة المرور صحيحة، إخفاء رسالة الخطأ
+            errorMessage.style.display = 'none';
+
+            // توجيه المستخدم إلى صفحة seek.html
+            window.location.href = "seek.html";
+        } else {
+            // إذا كانت كلمة المرور خاطئة، إظهار رسالة الخطأ
+            errorMessage.style.display = 'block';
+        }
+    });
+</script>
+
+</body>
+</html>

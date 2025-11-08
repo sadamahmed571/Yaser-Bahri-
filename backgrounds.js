@@ -1,379 +1,569 @@
-// مجموعات ألوان متخصصة للأقمشة والملابس (مرتبة حسب التدرج من الفاتح إلى الداكن)
-const fabricColorPalette = {
-    // 👖 ألوان الدنيم (Denim Colors) - 15 تدرج
-    denim: [
-        "#f8fbff", // Extra Light Denim
-        "#ebf5fb", // Lightest Denim Wash
-        "#e1f0fa", // Very Light Denim
-        "#d6eaf8", // Sky Wash
-        "#c8e3f6", // Light Stone Washed
-        "#aed6f1", // Stone Washed
-        "#9bc9eb", // Medium Stone Washed
-        "#85c1e9", // Faded Blue
-        "#70bae6", // Light Classic Denim
-        "#5dade2", // Medium Denim Blue
-        "#4a9fde", // Denim Blue
-        "#3498db", // Classic Denim
-        "#2e86c1", // Dark Denim
-        "#2874a6", // Vintage Indigo
-        "#21618c", // Raw Denim
-        "#1c4c6e", // Deep Indigo
-        "#153a57"  // Darkest Indigo
-    ],
+   // تعريف المتغيرات
+    let colorPickerFile;
+    let colorPickerDropArea = document.getElementById("colorPickerDropArea");
+    let colorPickerBrowseBtn = document.getElementById("colorPickerBrowseBtn");
+    let colorPickerImage = document.getElementById("colorPickerImage");
+    let colorPickerCanvas = document.getElementById("colorPickerCanvas");
+    let colorPickerMagnifier = document.getElementById("colorPickerMagnifier");
+    let colorPickerColorPreview = document.getElementById("colorPickerColorPreview");
+    let colorPickerColorCode = document.getElementById("colorPickerColorCode");
+    let colorPickerModal = document.getElementById("colorPickerModal");
+    let closeBtn = document.getElementById("closeBtn");
+    let colorPickerConfirmBtn = document.getElementById("colorPickerConfirmBtn");
+    let colorPickerThumbnails = document.getElementById("colorPickerThumbnails");
+    
+    let selectedColorHex = "#FFFFFF";
+    let selectedColorRgb = "rgb(255, 255, 255)";
+    let activeColorSection = 'background'; // القسم النشط الحالي
 
-    // 🧶 ألوان الصوف (Wool Colors) - 15 تدرج
-    wool: [
-        "#ffffff", // Pure White Wool
-        "#fdfefe", // Natural Wool White
-        "#fbfcfc", // Cream Wool
-        "#f9fafa", // Off-White Wool
-        "#f7f9f9", // Light Gray Wool
-        "#f4f6f7", // Oatmeal Gray
-        "#f2f3f4", // Medium Gray Wool
-        "#f0f3f4", // Dark Gray
-        "#edf2f7", // Heather Gray
-        "#e5e8e8", // Light Silver
-        "#d5dbdb", // Silver Mist
-        "#c8d0d0", // Medium Silver
-        "#babecc", // Slate Wool
-        "#a6aab5", // Dark Slate Wool
-        "#8e929c", // Charcoal Wool
-        "#757983"  // Deep Wool Gray
-    ],
+    // تهيئة أداة استخراج الألوان
+    const initializeColorPicker = () => {
+      // إعداد أحداث السحب والإفلات
+      ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+        colorPickerDropArea.addEventListener(eventName, preventDefaults, false);
+      });
+      
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      
+      // إبراز منطقة السحب عند السحب فوقها
+      ["dragenter", "dragover"].forEach(eventName => {
+        colorPickerDropArea.addEventListener(eventName, highlight, false);
+      });
+      
+      ["dragleave", "drop"].forEach(eventName => {
+        colorPickerDropArea.addEventListener(eventName, unhighlight, false);
+      });
+      
+      function highlight() {
+        colorPickerDropArea.classList.add("highlight");
+      }
+      
+      function unhighlight() {
+        colorPickerDropArea.classList.remove("highlight");
+      }
+      
+      // معالجة الملف المسقط
+      colorPickerDropArea.addEventListener("drop", handleDroppedFile, false);
+      
+      // معالجة اختيار الملف
+      colorPickerBrowseBtn.addEventListener("change", handleSelectedFile);
+      
+      // إعداد أحداث منتقي الألوان
+      colorPickerImage.addEventListener("mousemove", openEyedropper);
+      colorPickerImage.addEventListener("mouseenter", openMagnifier);
+      colorPickerImage.addEventListener("mouseout", closeEyedropper);
+      colorPickerImage.addEventListener("click", pickColor);
+      
+      // إغلاق النافذة المنبثقة
+      closeBtn.addEventListener("click", closeModal);
+      
+      // تأكيد اختيار اللون
+      colorPickerConfirmBtn.addEventListener("click", confirmColor);
+      
+      // تحميل الصور المصغرة
+      loadThumbnails();
+      
+      // إعداد أزرار استخراج الألوان في الأقسام المختلفة
+      document.querySelectorAll('.extract-color-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          activeColorSection = this.dataset.section;
+          openModal();
+        });
+      });
+    };
+    
+    // معالجة الملف المسقط
+    const handleDroppedFile = (e) => {
+      const dt = e.dataTransfer;
+      const file = dt.files[0];
+      handleFile(file);
+    };
+    
+    // معالجة اختيار الملف
+    const handleSelectedFile = () => {
+      const file = colorPickerBrowseBtn.files[0];
+      handleFile(file);
+    };
+    
+    // معالجة الملف وعرض الصورة
+    const handleFile = (file) => {
+      if (file && file.type.match("image.*")) {
+        const reader = new FileReader();
+        
+        reader.addEventListener("load", function() {
+          colorPickerImage.src = reader.result;
+          resetSelectedColor();
+        });
+        
+        reader.readAsDataURL(file);
+      }
+    };
+    
+    // فتح النافذة المنبثقة
+    const openModal = () => {
+      colorPickerModal.style.display = "block";
+    };
+    
+    // إغلاق النافذة المنبثقة
+    const closeModal = () => {
+      colorPickerModal.style.display = "none";
+    };
+    
+    // استخدام منتقي الألوان
+    const openEyedropper = (e) => {
+      const pos = getCursorPos(e);
+      const x = pos.x;
+      const y = pos.y;
+      
+      useCanvas(colorPickerCanvas, colorPickerImage, function() {
+        const p = colorPickerCanvas.getContext("2d").getImageData(x, y, 1, 1).data;
+        colorPickerMagnifier.style.backgroundColor = colorCode(p[0], p[1], p[2]);
+      });
+    };
+    
+    // فتح العدسة المكبرة
+    const openMagnifier = () => {
+      colorPickerMagnifier.style.display = "block";
+      
+      const moveMagnifier = (e) => {
+        const pos = getCursorPos(e);
+        const x = pos.x;
+        const y = pos.y;
+        
+        colorPickerMagnifier.style.left = (e.pageX - 50) + "px";
+        colorPickerMagnifier.style.top = (e.pageY - 50) + "px";
+        
+        // تكبير جزء من الصورة داخل العدسة
+        const zoom = 2;
+        const bgX = -x * zoom + 50;
+        const bgY = -y * zoom + 50;
+        
+        colorPickerMagnifier.style.backgroundImage = `url('${colorPickerImage.src}')`;
+        colorPickerMagnifier.style.backgroundSize = `${colorPickerImage.width * zoom}px ${colorPickerImage.height * zoom}px`;
+        colorPickerMagnifier.style.backgroundPosition = `${bgX}px ${bgY}px`;
+      };
+      
+      colorPickerImage.addEventListener("mousemove", moveMagnifier);
+    };
+    
+    // إغلاق منتقي الألوان
+    const closeEyedropper = () => {
+      colorPickerMagnifier.style.display = "none";
+    };
+    
+    // الحصول على موضع المؤشر
+    const getCursorPos = (e) => {
+      const a = colorPickerImage.getBoundingClientRect();
+      const x = e.pageX - a.left - window.pageXOffset;
+      const y = e.pageY - a.top - window.pageYOffset;
+      return { x: x, y: y };
+    };
+    
+    // استخدام canvas لرسم الصورة
+    const useCanvas = (el, img, callback) => {
+      el.width = img.width;
+      el.height = img.height;
+      el.getContext("2d").drawImage(img, 0, 0, img.width, img.height);
+      return callback();
+    };
+    
+    // تحويل RGB إلى HEX
+    const colorCode = (r, g, b) => {
+      function componentToHex(c) {
+        const hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+      }
+      
+      selectedColorHex = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+      selectedColorRgb = `rgb(${r}, ${g}, ${b})`;
+      
+      return selectedColorHex;
+    };
+    
+    // اختيار اللون
+    const pickColor = () => {
+      colorPickerColorPreview.style.backgroundColor = selectedColorHex;
+      colorPickerColorCode.textContent = selectedColorHex;
+    };
+    
+    // إعادة تعيين اللون المختار
+    const resetSelectedColor = () => {
+      selectedColorHex = "#FFFFFF";
+      selectedColorRgb = "rgb(255, 255, 255)";
+      colorPickerColorPreview.style.backgroundColor = selectedColorHex;
+      colorPickerColorCode.textContent = selectedColorHex;
+    };
+    
+    // تأكيد اختيار اللون
+    const confirmColor = () => {
+      selectNewColor(selectedColorHex, activeColorSection);
+      closeModal();
+    };
+    
+    // تحميل الصور المصغرة
+    const loadThumbnails = () => {
+      // في هذا المثال، سنستخدم صورًا افتراضية
+      // في التطبيق الحقيقي، يمكنك استبدالها بصور من مجلد wheels
+      const thumbnailUrls = [
+        "wheels/wheel2.png",
+        "wheels/wheel1.jpg",
+        "https://via.placeholder.com/100/3357FF/FFFFFF?text=3",
+        "https://via.placeholder.com/100/F333FF/FFFFFF?text=4",
+        "https://via.placeholder.com/100/33FFF3/FFFFFF?text=5",
+        "https://via.placeholder.com/100/FF33A1/FFFFFF?text=6"
+      ];
+      
+      thumbnailUrls.forEach(url => {
+        const img = document.createElement("img");
+        img.src = url;
+        img.className = "color-picker-thumbnail";
+        img.addEventListener("click", function() {
+          colorPickerImage.src = url;
+          resetSelectedColor();
+        });
+        colorPickerThumbnails.appendChild(img);
+      });
+    };
 
-    // 🎀 ألوان الحرير (Silk Colors) - 15 تدرج
-    silk: [
-        "#fffef5", // Pure Silk White
-        "#fef9e7", // Silk White
-        "#fcf7e1", // Light Ivory
-        "#f2f4e3", // Ivory Silk
-        "#fcf3cf", // Cream Silk
-        "#f9e79f", // Champagne Gold
-        "#f7dc6f", // Light Gold Sheen
-        "#f5d55f", // Medium Gold
-        "#f4d03f", // Rich Silk Gold
-        "#f2c94c", // Bright Gold
-        "#f1c40f", // Bright Marigold
-        "#e6b80f", // Marigold
-        "#d4ac0d", // Dark Gold
-        "#b7950b", // Deep Silk Bronze
-        "#9a7d0a", // Vintage Silk Yellow
-        "#7d6608"  // Dark Bronze
-    ],
+    // مجموعات ألوان متخصصة للأقمشة والملابس (مرتبة حسب التدرج من الفاتح إلى الداكن)
+    const fabricColorPalette = {
+        // ... (نفس المحتوى السابق) ...
+    };
 
-    // 👔 ألوان القطن (Cotton Colors) - 15 تدرج
-    cotton: [
-        "#ffffff", // Pure White Cotton
-        "#fafafa", // Pure Cotton White
-        "#f5f5f5", // Natural Cotton
-        "#f0f0f0", // Light Washed Cotton
-        "#eeeeee", // Washed Cotton Gray
-        "#e0e0e0", // Light Cotton
-        "#d6d6d6", // Medium Light Cotton
-        "#bdbdbd", // Medium Cotton Gray
-        "#a7c0af", // Sage Green Cotton
-        "#9e9e9e", // Gray Cotton
-        "#8c8c8c", // Medium Dark Cotton
-        "#757575", // Dark Cotton
-        "#616161", // Charcoal Cotton
-        "#4a4a4a", // Deep Charcoal
-        "#424242", // Deep Cotton Black
-        "#212121"  // Jet Black Cotton
-    ],
+    // قوائم الألوان الجديدة
+    const colorLists = {
+        "your-colors": [
+            "#14191c", "#17223e", "#1a2423", "#1b222c", "#1c2625", "#1d1e33", "#2a2a28", "#2c1821", "#2d3b2e", "#2f1217",
+            "#342e22", "#342e30", "#35241c", "#371418", "#3b3b3d", "#3d1e26", "#3e2c2a", "#3f382e", "#402129", "#424345",
+            "#42311d", "#4b6353", "#4d515d", "#50252c", "#525866", "#544236", "#545863", "#563a2c", "#5d4c52", "#5d5b60",
+            "#604e3a", "#634a46", "#66503b", "#673212", "#6c5a42", "#6c6462", "#6c7f69", "#724d44", "#724f39", "#75573b",
+            "#756649", "#79553f", "#795755", "#7a5052", "#7b6243", "#7d7d63", "#7f5a48", "#855a47", "#8f7051", "#999883",
+            "#9a846c", "#a1a08b", "#ad8d54", "#ba9e5f", "#bc7b65", "#c09e79", "#ca8975", "#cd8b7f", "#c8835c", "#dbac78",
+            "#d6b276"
+        ],
+        
+        "your-palette": [
+            "#071925", "#412823", "#573d56", "#3b454e", "#3f4541", "#45484d", "#4a4542", "#4a495a", "#5d4835", "#5f5a57",
+            "#595c61", "#606c78", "#615957", "#626747", "#633e35", "#63734e", "#676d69", "#6a7c62", "#6b6e75", "#6b7076",
+            "#724f31", "#736b69", "#74382e", "#777f5a", "#794b8b", "#794e3d", "#7f8289", "#80838c", "#832943", "#877f7d",
+            "#893626", "#899ac6", "#915a3c", "#914f39", "#9198a0", "#937539", "#9d9592", "#a3a9b7", "#a4b392", "#a69fd2",
+            "#a9a335", "#ab1a58", "#afa5a3", "#afa5a4", "#b0b3a0", "#b5a281", "#b8bac6", "#b9a44b", "#bbc3ce", "#bd6da0",
+            "#bec4c2", "#c3b9b8", "#c4842d", "#c8835c", "#c8a771", "#c98b7d", "#ccbdde", "#d1bb92", "#d2e1f6", "#d4bfa4",
+            "#d7ccc8", "#d7e1e3", "#d9be82", "#da97c2", "#dbba98", "#dbc4ad", "#dccb93", "#ddc4ad", "#dfc5e0", "#e29e7b",
+            "#e47a62", "#e4dad9", "#e6bfce", "#e6e1a7", "#e7b3c0", "#ed3d86", "#f599b2", "#f3ebe9", "#fff5df"
+        ],
+        
+        "gradients": {
+            "الأزرق": ["#D6F0FF", "#B0E0FF", "#8ACFFF", "#64BFFF", "#3EAEFF", "#189EFF", "#007FD4", "#005FA0", "#003F6C"],
+            "السماوي (سيان)": ["#D4FBFF", "#A8F6FF", "#7CF1FF", "#50ECFF", "#24E7FF", "#00D6F0", "#00B0C0", "#008A90", "#006460"],
+            "الأخضر الفاتح": ["#D9FFE3", "#B3FFD0", "#8DFFBD", "#67FFA9", "#41FF96", "#1BFF83", "#00D96B", "#00A351", "#006C37"],
+            "الأخضر المصفر": ["#F0FFD6", "#E0FFB0", "#D0FF8A", "#C0FF64", "#B0FF3E", "#A0FF18", "#84D400", "#64A000", "#447000"],
+            "الأصفر": ["#FFFBD6", "#FFF7B0", "#FFF38A", "#FFEF64", "#FFEB3E", "#FFE718", "#D4C000", "#A09000", "#6C6000"],
+            "البرتقالي": ["#FFECD6", "#FFD8B0", "#FFC48A", "#FFB064", "#FF9C3E", "#FF8818", "#D46C00", "#A05000", "#6C3400"],
+            "الأحمر البرتقالي": ["#FFE2D6", "#FFC4B0", "#FFA68A", "#FF8864", "#FF6A3E", "#FF4C18", "#D43C00", "#A02C00", "#6C1C00"],
+            "الأحمر": ["#FFD6D6", "#FFB0B0", "#FF8A8A", "#FF6464", "#FF3E3E", "#FF1818", "#D40000", "#A00000", "#6C0000"],
+            "الوردي": ["#FFD6E6", "#FFB0D4", "#FF8AC2", "#FF64B0", "#FF3E9E", "#FF188C", "#D40070", "#A00054", "#6C0038"],
+            "البنفسجي": ["#F0D6FF", "#E0B0FF", "#D08AFF", "#C064FF", "#B03EFF", "#A018FF", "#8400D4", "#6400A0", "#44006C"]
+        }
+    };
 
-    // 🧥 ألوان المعاطف (Coat Colors) - 15 تدرج
-    coat: [
-        "#a57c52", // Light Cocoa Brown
-        "#8b4513", // Cocoa Brown Coat
-        "#7a3d10", // Medium Cocoa
-        "#665d1e", // Olive Drab Coat
-        "#5a5218", // Dark Olive
-        "#512e5f", // Plum Coat
-        "#482858", // Dark Plum
-        "#4a235a", // Deep Purple Coat
-        "#3d1c4a", // Very Deep Purple
-        "#34495e", // Dark Blue Coat
-        "#2c3e50", // Classic Navy Coat
-        "#253342", // Darker Navy
-        "#1b4f72", // Navy Blue Coat
-        "#154360", // Deep Navy Coat
-        "#0e6251", // Forest Green Coat
-        "#145a32", // Hunter Green Coat
-        "#0d4023", // Dark Forest Green
-        "#2c2c2c"  // Black Coat
-    ],
+    // العناصر الرئيسية
+    const mainDesignSelect = document.getElementById('main-design-select');
+    const previewImage = document.getElementById('assistant-preview-image');
+    const confirmBackgroundBtn = document.getElementById('confirm-background-btn');
 
-    // 🌿 ألوان الكتان (Linen Colors) - 15 تدرج
-    linen: [
-        "#fffff8", // Pure Linen White
-        "#fffaf0", // Linen White
-        "#fefce8", // Light Natural
-        "#f5f5dc", // Natural Beige
-        "#f0f0d8", // Light Beige
-        "#eedd82", // Light Goldenrod
-        "#e6d8ad", // Khaki
-        "#e0d0a0", // Light Khaki
-        "#d2b48c", // Burlywood
-        "#c9b17a", // Medium Burlywood
-        "#c2b280", // Sand
-        "#b0c4de", // Light Steel Blue
-        "#9db4d4", // Medium Steel Blue
-        "#87cefa", // Light Sky Blue
-        "#778899", // Light Slate Gray
-        "#6a5acd", // Slate Blue
-        "#5d4fbb"  // Dark Slate Blue
-    ],
+    // المتغيرات الجديدة
+    let selectedBackgroundColor = '#000000';
+    let selectedPatternColor = '#000000';
+    let selectedBorderColor = '#000000';
 
-    // 🧤 ألوان الجلد والشمواه (Suede/Leather Colors) - 15 تدرج
-    suedeLeather: [
-        "#d4a574", // Light Tan Suede
-        "#cd853f", // Peru Red
-        "#c17a3a", // Medium Peru
-        "#b8860b", // Dark Goldenrod
-        "#b48866", // Taupe Suede
-        "#a87c5a", // Medium Taupe
-        "#a0522d", // Sienna Brown
-        "#8f4a25", // Dark Sienna
-        "#996515", // Antique Bronze
-        "#8b4513", // Saddle Brown
-        "#7a3d10", // Dark Saddle
-        "#800000", // Oxblood
-        "#6f0000", // Dark Oxblood
-        "#704214", // Sepia Brown
-        "#5f4323", // Deep Chocolate Brown
-        "#4f2c0f", // Dark Suede
-        "#3f220c"  // Very Dark Suede
-    ],
+    // إنشاء لوحات الألوان الجديدة
+    function createNewColorPalettes() {
+        // إنشاء لوحات الألوان للخلفية
+        createColorPaletteForSection('background', 'your-colors-palette', 'your-colors');
+        createColorPaletteForSection('background', 'your-palette-palette', 'your-palette');
+        createColorPaletteForSection('background', 'gradients-palette', 'gradients');
+        
+        // إنشاء لوحات الألوان للنقشة
+        createColorPaletteForSection('pattern', 'pattern-your-colors-palette', 'your-colors');
+        createColorPaletteForSection('pattern', 'pattern-your-palette-palette', 'your-palette');
+        createColorPaletteForSection('pattern', 'pattern-gradients-palette', 'gradients');
+        
+        // إنشاء لوحات الألوان للحاشية
+        createColorPaletteForSection('border', 'border-your-colors-palette', 'your-colors');
+        createColorPaletteForSection('border', 'border-your-palette-palette', 'your-palette');
+        createColorPaletteForSection('border', 'border-gradients-palette', 'gradients');
+    }
 
-    // 👑 ألوان المخمل (Velvet Colors) - 15 تدرج
-    velvet: [
-        "#e6c200", // Light Golden Rod
-        "#daa520", // Golden Rod
-        "#c8951c", // Dark Golden Rod
-        "#ff1493", // Deep Pink
-        "#e01282", // Medium Deep Pink
-        "#708090", // Slate Gray Velvet
-        "#657585", // Dark Slate Gray
-        "#8a2be2", // Blue Violet
-        "#7a26c7", // Dark Blue Violet
-        "#4b0082", // Indigo Royal
-        "#3d006b", // Dark Indigo
-        "#483d8b", // Dark Slate Blue
-        "#3a316e", // Very Dark Slate Blue
-        "#000080", // Deep Navy
-        "#000066", // Darker Navy
-        "#8b008b", // Dark Magenta
-        "#006400", // Dark Forest Green
-        "#5c0000", // Velvet Red
-        "#800000"  // Maroon Deep
-    ],
+    function createColorPaletteForSection(section, containerId, colorType) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error(`Container not found: ${containerId}`);
+            return;
+        }
+        container.innerHTML = '';
 
-    // 👚 ألوان قماش الجيرسيه (Jersey Knit Colors) - 15 تدرج
-    jerseyKnit: [
-        "#fffef9", // Pure Jersey White
-        "#fdf5e6", // Old Lace
-        "#fcf4e8", // Light Lace
-        "#f0f8ff", // Alice Blue
-        "#e8f4ff", // Light Alice Blue
-        "#f0fff0", // Honeydew
-        "#e8ffe8", // Light Honeydew
-        "#ffe4e1", // Misty Rose
-        "#ffdbd8", // Light Misty Rose
-        "#e6e6fa", // Lavender
-        "#dddafa", // Light Lavender
-        "#b0e0e6", // Powder Blue
-        "#9fd6dc", // Light Powder Blue
-        "#afeeee", // Pale Turquoise
-        "#98fb98", // Pale Green
-        "#88eb88", // Light Pale Green
-        "#add8e6", // Light Blue
-        "#ffa07a", // Light Salmon
-        "#f08080"  // Light Coral
-    ],
+        if (colorType === 'gradients') {
+            // معالجة التدرجات
+            for (const [gradientName, colors] of Object.entries(colorLists.gradients)) {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'color-group-new';
 
-    // 🧵 ألوان الترتان/البلايد (Tartan/Plaid Colors) - 15 تدرج
-    tartanPlaid: [
-        "#fff200", // Bright Gold
-        "#ffd700", // Gold
-        "#e6c200", // Dark Gold
-        "#ff4500", // Orange Red
-        "#e63d00", // Dark Orange Red
-        "#dc143c", // Crimson Red
-        "#c51236", // Dark Crimson
-        "#b03060", // Deep Ruby
-        "#9c2a54", // Dark Ruby
-        "#a52a2a", // Brown
-        "#8b0000", // Dark Red
-        "#7a0000", // Very Dark Red
-        "#4682b4", // Steel Blue
-        "#3e74a0", // Dark Steel Blue
-        "#5f9ea0", // Cadet Blue
-        "#228b22", // Forest Green
-        "#1c7a1c", // Dark Forest Green
-        "#00008b", // Dark Blue
-        "#000000"  // Black
-    ],
+                const groupTitle = document.createElement('h5');
+                groupTitle.textContent = gradientName;
+                groupDiv.appendChild(groupTitle);
 
-    // 🌫️ ألوان التويد (Tweed Colors) - 15 تدرج
-    tweed: [
-        "#e0e0e0", // Light Silver Tweed
-        "#c0c0c0", // Silver Tweed
-        "#a8a8a8", // Dark Silver
-        "#d2b48c", // Tan
-        "#c9a87a", // Light Tan
-        "#cd853f", // Peru Brown
-        "#b57638", // Dark Peru
-        "#a9a9a9", // Dark Gray Tweed
-        "#8b4513", // Saddle Brown
-        "#7a3d10", // Dark Saddle
-        "#a52a2a", // Rusty Brown
-        "#8f2424", // Dark Rust
-        "#808000", // Olive Dark
-        "#6b8e23", // Olive Drab
-        "#5d7a1e", // Dark Olive Drab
-        "#7b68ee", // Medium Slate Blue
-        "#6a58d4", // Dark Slate Blue
-        "#556b2f", // Dark Olive Green
-        "#36454F"  // Charcoal Gray
-    ]
-};
+                const buttonsContainer = document.createElement('div');
+                buttonsContainer.className = 'color-buttons-new';
 
-// العناصر الرئيسية
-const mainDesignSelect = document.getElementById('main-design-select');
-const previewImage = document.getElementById('assistant-preview-image');
-const colorPalette = document.getElementById('color-palette');
-const imageDisplay = document.getElementById('image-display');
-const customColorBtn = document.getElementById('custom-color-btn');
-const customColorPicker = document.getElementById('custom-color-picker');
-const confirmBackgroundBtn = document.getElementById('confirm-background-btn');
-// الإضافات الجديدة
-const borderColorPicker = document.getElementById('border-color-picker');
-const patternColorPicker = document.getElementById('pattern-color-picker');
+                colors.forEach(color => {
+                    const colorButton = document.createElement('button');
+                    colorButton.className = 'color-button-new';
+                    colorButton.style.backgroundColor = color;
+                    colorButton.dataset.color = color;
+                    colorButton.dataset.section = section;
 
-// متغير لتخزين اللون المختار للخلفية
-let selectedColor = '';
+                    colorButton.addEventListener('click', function() {
+                        selectNewColor(color, section);
+                    });
 
-// إنشاء لوحة الألوان
-function createColorPalette() {
-    for (const colorGroup in fabricColorPalette) {
-        const groupDiv = document.createElement('div');
-        groupDiv.className = 'color-group';
+                    buttonsContainer.appendChild(colorButton);
+                });
 
-        const groupTitle = document.createElement('h4');
-        // تحويل اسم المجموعة إلى عربي - تم إزالة الإدخالات غير الموجودة في لوحة الألوان
-        const groupNames = {
-            denim: '👖 ألوان الدنيم',
-            wool: '🧶 ألوان الصوف',
-            silk: '🎀 ألوان الحرير',
-            cotton: '👔 ألوان القطن',
-            coat: '🧥 ألوان المعاطف',
-            linen: '🌿 ألوان الكتان',
-            suedeLeather: '🧤 ألوان الجلد/الشمواه',
-            velvet: '👑 ألوان المخمل',
-            jerseyKnit: '👚 ألوان قماش الجيرسيه',
-            tartanPlaid: '🧵 ألوان الترتان/البلايد',
-            tweed: '🌫️ ألوان التويد'
-        };
+                groupDiv.appendChild(buttonsContainer);
+                container.appendChild(groupDiv);
+            }
+        } else {
+            // معالجة الألوان العادية
+            const colors = colorLists[colorType];
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'color-group-new';
 
-        groupTitle.textContent = groupNames[colorGroup] || colorGroup;
-        groupDiv.appendChild(groupTitle);
+            const groupTitle = document.createElement('h5');
+            groupTitle.textContent = colorType === 'your-colors' ? 'ألوانك' : 'لوحتك';
+            groupDiv.appendChild(groupTitle);
 
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.className = 'color-buttons2';
+            const buttonsContainer = document.createElement('div');
+            buttonsContainer.className = 'color-buttons-new';
 
-        fabricColorPalette[colorGroup].forEach(color => {
-            const colorButton = document.createElement('button');
-            colorButton.className = 'color-button2';
-            colorButton.style.backgroundColor = color;
-            colorButton.dataset.color = color;
+            colors.forEach(color => {
+                const colorButton = document.createElement('button');
+                colorButton.className = 'color-button-new';
+                colorButton.style.backgroundColor = color;
+                colorButton.dataset.color = color;
+                colorButton.dataset.section = section;
 
-            colorButton.addEventListener('click', function() {
-                selectColor(color);
+                colorButton.addEventListener('click', function() {
+                    selectNewColor(color, section);
+                });
+
+                buttonsContainer.appendChild(colorButton);
             });
 
-            buttonsContainer.appendChild(colorButton);
+            groupDiv.appendChild(buttonsContainer);
+            container.appendChild(groupDiv);
+        }
+    }
+
+    // تحديد لون جديد
+    function selectNewColor(color, section) {
+        switch(section) {
+            case 'background':
+                selectedBackgroundColor = color;
+                document.getElementById('background-selected-preview').style.backgroundColor = color;
+                document.getElementById('final-background-color').style.backgroundColor = color;
+                break;
+            case 'pattern':
+                selectedPatternColor = color;
+                document.getElementById('pattern-selected-preview').style.backgroundColor = color;
+                document.getElementById('final-pattern-color').style.backgroundColor = color;
+                break;
+            case 'border':
+                selectedBorderColor = color;
+                document.getElementById('border-selected-preview').style.backgroundColor = color;
+                document.getElementById('final-border-color').style.backgroundColor = color;
+                break;
+        }
+
+        // تحديث خلفية الصورة
+        document.getElementById('image-display').style.backgroundColor = selectedBackgroundColor;
+
+        // إزالة التحديد من جميع أزرار القسم
+        document.querySelectorAll(`.color-button-new[data-section="${section}"]`).forEach(btn => {
+            btn.classList.remove('selected');
         });
 
-        groupDiv.appendChild(buttonsContainer);
-        colorPalette.appendChild(groupDiv);
-    }
-}
-
-// تحديد لون للخلفية
-function selectColor(color) {
-    selectedColor = color;
-    imageDisplay.style.backgroundColor = color;
-
-    // إزالة التحديد من جميع الأزرار
-    document.querySelectorAll('.color-button2').forEach(btn => {
-        btn.classList.remove('selected');
-    });
-
-    // إضافة التحديد للزر المختار
-    const selectedButton = document.querySelector(`.color-button2[data-color="${color}"]`);
-    if (selectedButton) {
-        selectedButton.classList.add('selected');
-    }
-}
-
-// تغيير الصورة بناءً على التحديد
-function changeImage() {
-    const selectedValue = mainDesignSelect.value;
-    previewImage.src = `backgrounds/${selectedValue}.png`;
-}
-
-// إرسال الرسالة عبر واتساب (تم التعديل)
-function sendWhatsAppMessage() {
-    if (!selectedColor) {
-        alert('يرجى اختيار لون خلفية أولاً');
-        return;
+        // إضافة التحديد للزر المختار
+        const selectedButton = document.querySelector(`.color-button-new[data-section="${section}"][data-color="${color}"]`);
+        if (selectedButton) {
+            selectedButton.classList.add('selected');
+        }
     }
 
-    const designNumber = mainDesignSelect.value;
-    const borderColor = borderColorPicker.value; // القيمة الجديدة للون الحاشية
-    const patternColor = patternColorPicker.value; // القيمة الجديدة للون النقشة
-
-    let message = `اعتمد هذا اللون [${selectedColor}] كخلفية للنقشة رقم (${designNumber})`;
-
-    // إضافة لون الحاشية إذا لم يكن أسود (القيمة الافتراضية)
-    if (borderColor !== '#000000') {
-        message += `\n**لون الحاشية المطلوب:** [${borderColor}]`;
+    // إدارة القوائم القابلة للطي
+    function setupCollapsibleSections() {
+        const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+        
+        collapsibleHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const section = this.parentElement;
+                const isActive = section.classList.contains('active');
+                
+                // إغلاق جميع الأقسام
+                document.querySelectorAll('.color-collapsible').forEach(sec => {
+                    sec.classList.remove('active');
+                });
+                
+                // فتح القسم المطلوب إذا لم يكن نشطاً
+                if (!isActive) {
+                    section.classList.add('active');
+                }
+            });
+        });
     }
 
-    // إضافة لون النقشة إذا لم يكن أسود (القيمة الافتراضية)
-    if (patternColor !== '#000000') {
-        message += `\n**لون النقشة المطلوب:** [${patternColor}]`;
+    // إدارة تبويبات الألوان
+    function setupColorTabs() {
+        const colorTabs = document.querySelectorAll('.color-tab');
+        
+        colorTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabType = this.dataset.tab;
+                const parentSection = this.closest('.collapsible-content');
+                const parentId = parentSection.parentElement.id;
+                
+                // إزالة النشاط من جميع الأزرار في هذا القسم
+                parentSection.querySelectorAll('.color-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // إضافة النشاط للزر المختار
+                this.classList.add('active');
+                
+                // إظهار اللوحة المناسبة
+                parentSection.querySelectorAll('.color-palette-tab').forEach(palette => {
+                    palette.classList.remove('active');
+                });
+                
+                let paletteId = '';
+                if (parentId === 'background-color-section') {
+                    paletteId = `${tabType}-palette`;
+                } else if (parentId === 'pattern-color-section') {
+                    paletteId = `pattern-${tabType}-palette`;
+                } else if (parentId === 'border-color-section') {
+                    paletteId = `border-${tabType}-palette`;
+                }
+                
+                const targetPalette = document.getElementById(paletteId);
+                if (targetPalette) {
+                    targetPalette.classList.add('active');
+                }
+            });
+        });
     }
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/967777967272?text=${encodedMessage}`;
+    // إعداد أزرار الألوان المخصصة
+    function setupCustomColorButtons() {
+        const customColorButtons = document.querySelectorAll('.custom-color-btn');
+        const customColorPickers = document.querySelectorAll('.custom-color-picker');
+        
+        customColorButtons.forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                const parentSection = this.closest('.collapsible-content');
+                let sectionType = '';
+                
+                if (parentSection.id.includes('background')) {
+                    sectionType = 'background';
+                } else if (parentSection.id.includes('pattern')) {
+                    sectionType = 'pattern';
+                } else if (parentSection.id.includes('border')) {
+                    sectionType = 'border';
+                }
+                
+                if (customColorPickers[index]) {
+                    customColorPickers[index].click();
+                    customColorPickers[index].dataset.section = sectionType;
+                }
+            });
+        });
+        
+        customColorPickers.forEach(picker => {
+            picker.addEventListener('change', function() {
+                const section = this.dataset.section;
+                if (section) {
+                    selectNewColor(this.value, section);
+                }
+            });
+        });
+    }
 
-    window.open(whatsappUrl, '_blank');
-}
+    // إرسال الرسالة عبر واتساب (محدث)
+    function sendWhatsAppMessage() {
+        const designNumber = mainDesignSelect.value;
 
-// تهيئة الصفحة
-function init() {
-    // إنشاء لوحة الألوان
-    createColorPalette();
+        let message = `اعتمد هذا اللون [${selectedBackgroundColor}] كخلفية للنقشة رقم (${designNumber})`;
 
-    // إضافة مستمع حدث لتغيير التصميم
-    mainDesignSelect.addEventListener('change', changeImage);
+        // إضافة لون النقشة إذا لم يكن أسود
+        if (selectedPatternColor !== '#000000') {
+            message += `\n**لون النقشة المطلوب:** [${selectedPatternColor}]`;
+        }
 
-    // إضافة مستمع حدث لزر اللون المخصص
-    customColorBtn.addEventListener('click', function() {
-        customColorPicker.click();
-    });
+        // إضافة لون الحاشية إذا لم يكن أسود
+        if (selectedBorderColor !== '#000000') {
+            message += `\n**لون الحاشية المطلوب:** [${selectedBorderColor}]`;
+        }
 
-    customColorPicker.addEventListener('change', function() {
-        selectColor(this.value);
-    });
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/967777967272?text=${encodedMessage}`;
 
-    // إضافة مستمع حدث لزر التأكيد والإرسال
-    confirmBackgroundBtn.addEventListener('click', sendWhatsAppMessage);
+        window.open(whatsappUrl, '_blank');
+    }
 
-    // تحميل الصورة الأولى عند التحميل
-    changeImage();
-}
+    // تغيير الصورة بناءً على التحديد
+    function changeImage() {
+        const selectedValue = mainDesignSelect.value;
+        previewImage.src = `backgrounds/${selectedValue}.png`;
+    }
 
-// تشغيل التهيئة عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', init);
+    // تهيئة جميع لوحات الألوان
+    function initializeAllColorPalettes() {
+        createNewColorPalettes();
+    }
+
+    // تهيئة الصفحة
+    function init() {
+        // إنشاء لوحات الألوان الجديدة
+        initializeAllColorPalettes();
+        
+        // إعداد القوائم القابلة للطي
+        setupCollapsibleSections();
+        
+        // إعداد تبويبات الألوان
+        setupColorTabs();
+        
+        // إعداد أزرار الألوان المخصصة
+        setupCustomColorButtons();
+
+        // إضافة مستمع حدث لتغيير التصميم
+        mainDesignSelect.addEventListener('change', changeImage);
+
+        // إضافة مستمع حدث لزر التأكيد والإرسال
+        confirmBackgroundBtn.addEventListener('click', sendWhatsAppMessage);
+
+        // تحميل الصورة الأولى عند التحميل
+        changeImage();
+        
+        // تعيين الألوان الافتراضية
+        selectNewColor('#000000', 'background');
+        selectNewColor('#000000', 'pattern');
+        selectNewColor('#000000', 'border');
+        
+        // تهيئة أداة استخراج الألوان
+        initializeColorPicker();
+    }
+
+    // تشغيل التهيئة عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', init);
