@@ -1070,9 +1070,9 @@ header h1 {
       background-color: #4CAF50;
       color: white;
       border: none;
-      padding: 12px 24px;
+      padding: 8px 16px;
       border-radius: 6px;
-      font-size: 16px;
+      font-size: 13px;
       cursor: pointer;
       margin-top: 15px;
       transition: background-color 0.3s;
@@ -1795,16 +1795,19 @@ header h1 {
 	
 	
 /* قسم مساعد تلوين الخلفيات */
+
+
+/* 1. backgrounds-section, backgrounds-header */
 .backgrounds-section {
     width: 96%;
-  
-    min-height: 500px;
+    min-height: 700px;
 }
 
 .backgrounds-header {
     margin-bottom: 5px;
 }
 
+/* 2. backgrounds-controls, backgrounds-control, backgrounds-control h3, backgrounds-control select */
 .backgrounds-controls {
     gap: 5px;
     width: 100%;
@@ -1815,7 +1818,6 @@ header h1 {
     padding: 10px;
     border-radius: 10px  ;
 	gap:10px;
-    
 }
 
 .backgrounds-control h3 {
@@ -1828,45 +1830,193 @@ header h1 {
 	 font-size: 14px;
 }
 
-  .color-panel {
-        width: 285px;
-        padding: 10px;
-    }
-    
-    .collapsible-header {
-        padding: 10px 12px;
-    }
-    
-    .collapsible-header span {
-        font-size: 13px;
-    }
-    
-    .color-tab {
-        font-size: 11px;
-        padding: 6px 3px;
-    }
-    
-    .color-buttons-new {
-        gap: 3px;
-    }
-    
-    .color-button-new {
-        width: 18px;
-        height: 18px;
-    }
-    
-    .final-color-item span {
-        font-size: 11px;
-    }
-    
-    .final-color-preview {
-        width: 25px;
-        height: 18px;
-    }
+/* 3. backgrounds-content - (لا يوجد تعديل خاص بها هنا) */
 
+.backgrounds-content {
+    display: flex;
+    height: 100%;
+    gap: 0;
+    margin-bottom: 30px;
+}
+/* 4. color-panel */
+.color-panel {
+    width: 310px;
+    min-height: 85vh;
+    padding: 0;
+}
+
+/* 5. collapsible-section (مستنسخ) */
+.collapsible-section {
+    flex: 1;
+    height: 90%;
+}
+
+/* 6. color-collapsible (مستنسخ) */
+.color-collapsible {
+    margin-bottom: 0;
+    border: none;      
+}
+
+.color-collapsible.active {
+    border-color: var(--accent-color);
+}
+
+/* 7. collapsible-header */
+.collapsible-header {
+    padding: 10px 12px;
+}
+
+.collapsible-header:hover { /* مستنسخ */
+    background-color: #34495e;
+}
+
+.color-collapsible.active .collapsible-header { /* مستنسخ */
+    background-color: var(--accent-color);
+}
+
+.collapsible-header span {
+    font-size: 13px;
+    color: #fff; /* مستنسخ */
+    font-weight: bold; /* مستنسخ */
+    font-size: 14px; /* مستنسخ - تم تعديله إلى 13px بالأعلى */
+}
+
+/* 8. selected-color-preview (مستنسخ) */
+.selected-color-preview {
+    width:30px;
+    height: 20px;
+    border-right: 2px solid #fff;
+    border-radius: 0;
+    background-color: none;
+}
+
+/* 9. collapsible-content (مستنسخ) */
+.collapsible-content {
+    display: none;
+    padding: 0;
+    background-color: #34495e;
+}
+
+.color-collapsible.active .collapsible-content { /* مستنسخ */
+    display: block;
+}
+
+/* 10. color-tabs (مستنسخ) */
+.color-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 15px;
+    border-bottom:none;
+    padding-bottom: 0;
+}
+
+/* 11. color-tab */
+.color-tab {
+    font-size: 11px;
+    padding: 6px 3px;
+}
+
+.color-tab.active { /* مستنسخ */
+    background: var(--primary-color);
+    color: #78c7ff;
+	 border-right: 2px solid  var(--accent-color);
+	  border-bottom : 1px solid var(--accent-color);
+}
+
+/* 12. color-palette-container (مستنسخ) */
+.color-palette-container {
+    margin-bottom: 15px;
+}
+
+/* 13. color-palette-tab (مستنسخ) */
+.color-palette-tab {
+    display: none;
+}
+
+.color-palette-tab.active { /* مستنسخ */
+    display: block;
+}
+
+/* 14. color-group-new (مستنسخ) */
+.color-group-new {
+    margin-bottom: 0;
+}
+
+.color-group-new h5 {
+    color: #bbd9fc;
+    font-size: 11px;
+    margin-bottom: 8px;
+    text-align: right;
+	display:none;
+}
+
+/* 15. color-buttons-new */
+.color-buttons-new {
+    gap: 3px;
+}
+
+.color-buttons-new:hover { /* مستنسخ */
+    transform: scale(1.1);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+/* 16. color-button-new */
+.color-button-new {
+    width: 18px;
+    height: 18px;
+}
+
+.color-button-new.selected { /* مستنسخ */
+    transform: scale(1.1);
+    box-shadow: 0 0 0 1px white, 0 0 0 2px #3498db;
+}
+
+/* 17. custom-color-btn (مستنسخ) */
+.custom-color-btn {
+    width: 100%;
+    padding: 8px;
+    background: none;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    color: #bbd9fc;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* 18. colors-footer (مستنسخ) */
+.colors-footer {
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #3c5d79;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+/* 19. final-color-item (مستنسخ) */
+.final-color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.final-color-item span {
+    font-size: 11px;
+}
+
+/* 20. final-color-preview */
+.final-color-preview {
+    width: 25px;
+    height: 18px;
+}
+
+/* 21. image-display, image-display img */
 .image-display {
     min-width: 95px;
-    min-height: 100%;
+    min-height: 85vh;
     background-color: var(--secondary-color);
     border-radius: 20px 0 0 20px;
     display: flex;
@@ -1879,10 +2029,11 @@ header h1 {
      min-width:100px;
     height: auto;
     min-height: 100%;
-    z-index: 1001;
+    z-index: 1000;
 	opacity:95%;
 }
 
+/* 22. confirm-background-btn */
 .confirm-background-btn {
     display: block;
     width: 100%;
@@ -1898,27 +2049,294 @@ header h1 {
     text-align: center;
     transition: background-color 0.3s;
 }
-    .background-nav { 
-        font-size:11px;
-        background:none !important;
-        border:1px solid var(--accent-color);
-        border-radius: 7px;
+
+.confirm-background-btn:hover { /* مستنسخ */
+    background-color: #2980b9;
+}
+
+/* 23. background-nav */
+.background-nav { 
+    font-size:11px;
+    background:none !important;
+    border:1px solid var(--accent-color);
+    border-radius: 7px;
+}
+
+
+/* 24. color-picker-btn (مستنسخ) */
+.color-picker-btn {
+      background-color: #4a6fa5;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background-color 0.3s;
     }
-	 .color-picker-content {
-        margin: 20px auto;
-        padding: 15px;
-      }
-      
-      .color-picker-top-block {
-        flex-direction: column;
-      }
-      
-      .color-picker-drop-area, 
-      .color-picker-image-area {
-        min-width: 100%;
-      }
+    
+.color-picker-btn:hover { /* مستنسخ */
+      background-color: #3a5a8a;
+    }
+    
+/* 25. color-picker-modal (مستنسخ) */
+.color-picker-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    
+/* 26. color-picker-content */
+.color-picker-content {
+    margin: 20px auto;
+    padding: 15px;
+    background-color: white; /* مستنسخ */
+    border-radius: 12px; /* مستنسخ */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* مستنسخ */
+    max-width: 768px; /* مستنسخ */
+    width: 90%; /* مستنسخ */
+}
+    
+/* 27. color-picker-header (مستنسخ) */
+.color-picker-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+/* 28. color-picker-title (مستنسخ) */
+.color-picker-title {
+      font-size: 22px;
+      color: #333;
+    }
+    
+/* 29. close-btn (مستنسخ) */
+.close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #777;
+    }
+    
+/* 30. color-picker-top-block */
+.color-picker-top-block {
+    flex-direction: column;
+    display: flex; /* مستنسخ */
+    flex-wrap: wrap; /* مستنسخ */
+    gap: 20px; /* مستنسخ */
+    margin-bottom: 25px; /* مستنسخ */
+}
+    
+/* 31. color-picker-drop-area */
+.color-picker-drop-area {
+    min-width: 100%;
+    flex: 1; /* مستنسخ */
+    border: 2px dashed #ccc; /* مستنسخ */
+    border-radius: 12px; /* مستنسخ */
+    display: flex; /* مستنسخ */
+    flex-direction: column; /* مستنسخ */
+    justify-content: center; /* مستنسخ */
+    align-items: center; /* مستنسخ */
+    padding: 30px; /* مستنسخ */
+    background-color: #f9f9f9; /* مستنسخ */
+    transition: all 0.3s; /* مستنسخ */
+    text-align: center; /* مستنسخ */
+}
+
+.color-picker-drop-area.highlight { /* مستنسخ */
+      border-color: #4a6fa5;
+      background-color: #eef4ff;
+    }
+    
+.color-picker-drop-area img { /* مستنسخ */
+      width: 60px;
+      margin-bottom: 15px;
+    }
+    
+.color-picker-drop-area p { /* مستنسخ */
+      color: #777;
+      margin-bottom: 15px;
+    }
+    
+/* 32. color-picker-browse-btn (مستنسخ) */
+.color-picker-browse-btn {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+    
+.color-picker-browse-btn input { /* مستنسخ */
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    
+.color-picker-browse-btn label { /* مستنسخ */
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4a6fa5;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+.color-picker-browse-btn label:hover { /* مستنسخ */
+      background-color: #3a5a8a;
+    }
+    
+/* 33. color-picker-image-area */
+.color-picker-image-area {
+    min-width: 100%;
+    flex: 2; /* مستنسخ */
+    padding: 15px; /* مستنسخ */
+    background-color: #f9f9f9; /* مستنسخ */
+    border-radius: 12px; /* مستنسخ */
+    display: flex; /* مستنسخ */
+    justify-content: center; /* مستنسخ */
+    align-items: center; /* مستنسخ */
+    position: relative; /* مستنسخ */
+}
+    
+/* 34. color-picker-image (مستنسخ) */
+.color-picker-image {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 6px;
+      cursor: crosshair;
+    }
+    
+/* 35. color-picker-magnifier (مستنسخ) */
+.color-picker-magnifier {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #333;
+      overflow: hidden;
+      pointer-events: none;
+      display: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+/* 36. color-picker-result (مستنسخ) */
+.color-picker-result {
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    
+/* 37. color-picker-result-title (مستنسخ) */
+.color-picker-result-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+	  
+    }
+    
+/* 38. color-picker-selected-color (مستنسخ) */
+.color-picker-selected-color {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+/* 39. color-picker-color-preview (مستنسخ) */
+.color-picker-color-preview {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+    }
+    
+/* 40. color-picker-color-code (مستنسخ) */
+.color-picker-color-code {
+      font-size: 18px;
+      font-family: monospace;
+      background-color: #eee;
+      padding: 10px 15px;
+      border-radius: 6px;
+      direction: ltr;
+    }
+    
+/* 41. color-picker-confirm-btn (مستنسخ) */
+.color-picker-confirm-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+    }
+    
+.color-picker-confirm-btn:hover { /* مستنسخ */
+      background-color: #3d8b40;
+    }
+    
+/* 42. color-picker-thumbnails (مستنسخ) */
+.color-picker-thumbnails {
+      margin-top: 25px;
+    }
+    
+/* 43. color-picker-thumbnails-title (مستنسخ) */
+.color-picker-thumbnails-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+/* 44. color-picker-thumbnails-container (مستنسخ) */
+.color-picker-thumbnails-container {
+       display: none;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 15px;
+	  
+    }
+    
+/* 45. color-picker-thumbnail (مستنسخ) */
+.color-picker-thumbnail {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    
+.color-picker-thumbnail:hover { /* مستنسخ */
+      transform: scale(1.05);
+    }
+    
+/* 46. color-picker-bottom-block, color-picker-colors (مستنسخ) */
+.color-picker-bottom-block,
+.color-picker-colors {
+      display: none;
+    }
 
 }
+
 
 /* ---------------------------------------------------------------------- */
 
