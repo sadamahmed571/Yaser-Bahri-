@@ -623,7 +623,7 @@ header h1 {
  /* التقسيم الجديد لـ backgrounds-content */
 .backgrounds-content {
     display: flex;
-    height: 85vh;
+    height: 80vh;
     gap: 0;
     margin-bottom: 40px;
 }
@@ -842,7 +842,7 @@ header h1 {
 
 .image-display {
     min-width: 110px;
-    height: 85vh;
+    height: 80vh;
     background-color: var(--secondary-color);
     border-radius: 20px 0 0 20px;
     display: flex;
