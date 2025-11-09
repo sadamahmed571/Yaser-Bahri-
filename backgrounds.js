@@ -133,11 +133,11 @@
         const x = pos.x;
         const y = pos.y;
         
-        colorPickerMagnifier.style.left = (e.pageX - 50) + "px";
-        colorPickerMagnifier.style.top = (e.pageY - 50) + "px";
+        colorPickerMagnifier.style.left = (e.pageX - 100) + "px";
+        colorPickerMagnifier.style.top = (e.pageY - 150) + "px";
         
         // تكبير جزء من الصورة داخل العدسة
-        const zoom = 2;
+        const zoom = 3;
         const bgX = -x * zoom + 50;
         const bgY = -y * zoom + 50;
         
