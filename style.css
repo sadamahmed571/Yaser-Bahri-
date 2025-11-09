@@ -623,53 +623,60 @@ header h1 {
  /* التقسيم الجديد لـ backgrounds-content */
 .backgrounds-content {
     display: flex;
-    height: 70vh;
+    height: 85vh;
     gap: 0;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .color-panel {
-    max-width: 480px;
+    max-width: 315px;
     width: 100%;
-    background:var(--secondary-color);
     padding: 0;
     border-radius: 0 20px 20px 0;
+	border: 2px solid #4a637c;
+	border-left:none;
     display: flex;
     flex-direction: column;
 }
 
 .collapsible-section {
     flex: 1;
-    height: 90%;
-     background: none;
+    height: 85%;
+    background:var(--primary-color);
+	border-radius: 0 20px 20px 0;
 }
 
 .color-collapsible {
     margin-bottom: 0;
-    border: none;      
+    border: none;    
+	 border-radius: 0 20px 0 0;
 }
 
 .color-collapsible.active {
     border-color: var(--accent-color);
+	background:var(--secondary-color);
 }
 
 .collapsible-header {
     padding: 10px 25px;
-    background: none;
+    background:  #1c5174;
+	 border-radius: 0 20px 0 0;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
-	 border-radius: 0 20px 0 0;
+	
 }
 
 .collapsible-header:hover {
     background-color: #34495e;
+	 border-radius: 0 20px 0 0;
 }
 
 .color-collapsible.active .collapsible-header {
     background-color: var(--accent-color);
+	 border-radius: 0 20px 0 0;
 }
 
 .collapsible-header span {
@@ -794,15 +801,25 @@ header h1 {
 
 /* Footer Section */
 .colors-footer {
-    height: 10%;
+    height: 15%;
+	 width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid #3c5d79;
-    padding-top: 10px;
     margin-top: 10px;
+	background:var(--primary-color);
 }
-
+.Footer-title {
+    color: #bbd9fc;
+    font-size: 14px;
+	background:var(--secondary-color);
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	 width: 100px;
+    height:100%;
+}
 .final-color-item {
     display: flex;
     flex-direction: column;
@@ -812,7 +829,7 @@ header h1 {
 
 .final-color-item span {
     color: #bbd9fc;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .final-color-preview {
@@ -825,7 +842,7 @@ header h1 {
 
 .image-display {
     min-width: 110px;
-    height: 70vh;
+    height: 85vh;
     background-color: var(--secondary-color);
     border-radius: 20px 0 0 20px;
     display: flex;
