@@ -1032,7 +1032,7 @@ header h1 {
     .color-picker-image-area {
       flex: 2;
       min-width: 300px;
-	  min-height: 150px;
+      padding: 15px;
       padding: 25px;
       background-color: #56626e;
       border-radius: 0;
@@ -1070,9 +1070,10 @@ header h1 {
 	   border-top: 1px dashed #65707b;
 	      border-bottom: 30px solid var(--primary-color);
       padding: 15px;
-      margin-bottom: 45px;
+      margin-bottom: 0;
       text-align: center; 
 	  display: flex;
+	   flex-wrap: wrap;
       justify-content:space-around;
       align-items: center;
     }
@@ -1086,7 +1087,7 @@ header h1 {
     
     .color-picker-selected-color {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       gap: 0;
       flex-wrap: wrap;
@@ -1097,7 +1098,7 @@ header h1 {
       height: 30px;
       border-radius:0 6px  6px 0;
       border: 1px solid #fff;
-	  border-left: 3px solid var(--primary-color);
+	  border-left: 3px solid #fff;
 	   
     }
     
@@ -1112,9 +1113,9 @@ header h1 {
 	display: flex;
       justify-content: center;
       align-items: center;
-	  margin-left: 25px;
+	  
     }
-    
+     
     .color-picker-confirm-btn {
       background-color: var(--accent-color);
       color: white;
@@ -1358,7 +1359,14 @@ header h1 {
     transition: background-color 0.3s;
     width: 100%;
 }
-
+.design-button2.approve-btn {
+    background-color: green !Important ;
+	 font-size: 11px;
+}
+.design-button2.approve-btn:not {
+    background-color: red !Important;
+	 font-size: 11px;
+}
 .design-button2:hover {
     /* تم التعديل */
     background-color: #2980b9;
@@ -1485,13 +1493,20 @@ header h1 {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0  ;
 }
 
 .version-view-button2:hover {
     background-color: #d35400;
 }
 
+
+.approve-version-btn.approved {
+    background-color: green !Important ;
+}
+.approve-version-btn:not(.approved) {
+    background-color: red !Important;
+}
 .version-bottom2 {
     /* تم التعديل والتحديث */
     gap: 10px;

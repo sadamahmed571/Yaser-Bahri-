@@ -13,7 +13,7 @@ const WHATSAPP_NUMBER = '+967777967272'; // رقم الواتساب المسته
 
 let currentDesignId = null; // لتتبع رقم التصميم الحالي (1 إلى 60)
 
-// قائمة الأحرف للإصدارات (a, b, c, ...)
+// قائمة الأحرف للإصدارات (1-1, 1-2, 1-3, ...)
 const VERSIONS = ['-1', '-2', '-3', '-4', '-5', '-6', '-7', '-8', '-9', '-10'];
 
 // عند تحميل الصفحة، نجهز كل شيء
@@ -375,6 +375,7 @@ function initializePreviewModals() {
             const item = e.target.closest('.version-item2');
             const imgSrc = item.querySelector('.version-image2 img').src;
             document.getElementById('version-previewed-image').src = imgSrc;
+            updateApproveButtonInModal(imgSrc);
             document.getElementById('version-preview-modal').style.display = 'flex';
         });
     });
@@ -396,6 +397,147 @@ function initializePreviewModals() {
             document.getElementById('version-preview-modal').style.display = 'none';
         }
     });
+
+    // تفعيل زر "الاطلاع على ألوان النقشة"
+    document.getElementById('view-colors-btn').addEventListener('click', () => {
+        const previewedImageSrc = document.getElementById('previewed-image').src;
+        const designId = previewedImageSrc.split('/').pop().split('.jpg')[0]; // استخراج رقم النقشة من src مثل img/2.jpg -> 2
+        loadVersionsForDesign(designId);
+        document.getElementById('image-preview-modal').style.display = 'none';
+        document.getElementById('versions').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // تفعيل زر الاعتماد في المودال
+    const approveBtn = document.querySelector('.approve-version-btn');
+    approveBtn.addEventListener('click', () => {
+        const imgSrc = document.getElementById('version-previewed-image').src;
+        const parts = imgSrc.split('/').pop().split('.jpg')[0].split('-');
+        const designId = parts[0];
+        const versionNum = parts[1];
+        const approvedKey = `approved_${designId}_${versionNum}`;
+        const isApproved = localStorage.getItem(approvedKey) === 'true';
+        const newApproved = !isApproved;
+        localStorage.setItem(approvedKey, newApproved);
+        approveBtn.textContent = newApproved ? 'إلغاء الاعتماد' : 'اعتماد هذا الاصدار';
+        approveBtn.classList.toggle('approved', newApproved);
+    });
 }
 
- 
+// وظيفة تحديث زر الاعتماد في المودال بناءً على الصورة
+function updateApproveButtonInModal(imgSrc) {
+    const approveBtn = document.querySelector('.approve-version-btn');
+    const parts = imgSrc.split('/').pop().split('.jpg')[0].split('-');
+    const designId = parts[0];
+    const versionNum = parts[1];
+    const approvedKey = `approved_${designId}_${versionNum}`;
+    const isApproved = localStorage.getItem(approvedKey) === 'true';
+    approveBtn.textContent = isApproved ? 'إلغاء الاعتماد' : 'اعتماد هذا الاصدار';
+    approveBtn.classList.toggle('approved', isApproved);
+}
+
+// وظيفة تحميل الإصدارات ديناميكياً لنقشة محددة
+function loadVersionsForDesign(designId) {
+    const grid = document.getElementById('designs-grid2');
+    grid.innerHTML = ''; // تفريغ المحتوى السابق
+
+    const container = document.createElement('div');
+    container.className = 'design-container2';
+    container.dataset.designId = designId;
+
+    const rightDiv = document.createElement('div');
+    rightDiv.className = 'design-right2';
+
+    const mainImageDiv = document.createElement('div');
+    mainImageDiv.className = 'design-main-image2';
+    const mainImg = document.createElement('img');
+    mainImg.src = `img/${designId}.jpg`;
+    mainImg.alt = `${designId}`;
+    mainImageDiv.appendChild(mainImg);
+
+    const metaDiv = document.createElement('div');
+    metaDiv.className = 'design-meta2';
+    const idDiv = document.createElement('div');
+    idDiv.className = 'design-id2';
+    idDiv.textContent = `النقشة : ${designId}`;
+    const colorsNumberDiv = document.createElement('div');
+    colorsNumberDiv.className = 'design-colors-number2';
+    colorsNumberDiv.textContent = 'عدد النقشات الملونة الجاهزة';
+    metaDiv.appendChild(idDiv);
+    metaDiv.appendChild(colorsNumberDiv);
+
+    rightDiv.appendChild(mainImageDiv);
+    rightDiv.appendChild(metaDiv);
+
+    const leftDiv = document.createElement('div');
+    leftDiv.className = 'design-left2';
+
+    const versionsRows = document.createElement('div');
+    versionsRows.className = 'versions-rows2';
+
+    const row1 = document.createElement('div');
+    row1.className = 'versions-row2';
+    const row2 = document.createElement('div');
+    row2.className = 'versions-row2';
+
+    for (let i = 1; i <= 10; i++) {
+        const versionItem = document.createElement('div');
+        versionItem.className = 'version-item2';
+
+        const versionImageDiv = document.createElement('div');
+        versionImageDiv.className = 'version-image2';
+        const versionImg = document.createElement('img');
+        versionImg.src = `ready-versions/${designId}-${i}.jpg`;
+        versionImg.alt = `${designId}-${i}`;
+        versionImageDiv.appendChild(versionImg);
+
+        const versionNameDiv = document.createElement('div');
+        versionNameDiv.className = 'version-name2';
+        versionNameDiv.textContent = `${designId}-${i}`;
+
+        const viewButton = document.createElement('button');
+        viewButton.className = 'version-view-button2';
+        viewButton.title = 'معاينة مكبرة';
+        viewButton.textContent = 'معاينة';
+
+        const approveButton = document.createElement('button');
+        approveButton.className = 'approve-btn design-button2';
+        const approvedKey = `approved_${designId}_${i}`;
+        const isApproved = localStorage.getItem(approvedKey) === 'true';
+        approveButton.textContent = isApproved ? 'إلغاء الاعتماد' : 'اعتماد';
+        approveButton.addEventListener('click', () => {
+            const newApproved = !isApproved;
+            localStorage.setItem(approvedKey, newApproved);
+            approveButton.textContent = newApproved ? 'إلغاء الاعتماد' : 'اعتماد';
+        });
+
+        versionItem.appendChild(versionImageDiv);
+        versionItem.appendChild(versionNameDiv);
+        versionItem.appendChild(viewButton);
+        versionItem.appendChild(approveButton);
+
+        if (i <= 5) {
+            row1.appendChild(versionItem);
+        } else {
+            row2.appendChild(versionItem);
+        }
+    }
+
+    versionsRows.appendChild(row1);
+    versionsRows.appendChild(row2);
+    leftDiv.appendChild(versionsRows);
+
+    container.appendChild(rightDiv);
+    container.appendChild(leftDiv);
+    grid.appendChild(container);
+
+    // إعادة تفعيل أزرار المعاينة بعد الإنشاء الديناميكي
+    document.querySelectorAll('.version-view-button2').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const item = e.target.closest('.version-item2');
+            const imgSrc = item.querySelector('.version-image2 img').src;
+            document.getElementById('version-previewed-image').src = imgSrc;
+            updateApproveButtonInModal(imgSrc);
+            document.getElementById('version-preview-modal').style.display = 'flex';
+        });
+    });
+}

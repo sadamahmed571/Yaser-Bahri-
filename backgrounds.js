@@ -133,11 +133,11 @@
         const x = pos.x;
         const y = pos.y;
         
-        colorPickerMagnifier.style.left = (e.pageX - 100) + "px";
-        colorPickerMagnifier.style.top = (e.pageY - 150) + "px";
+        colorPickerMagnifier.style.left = (e.pageX - 50) + "px";
+        colorPickerMagnifier.style.top = (e.pageY - 50) + "px";
         
         // تكبير جزء من الصورة داخل العدسة
-        const zoom = 3;
+        const zoom = 2;
         const bgX = -x * zoom + 50;
         const bgY = -y * zoom + 50;
         
@@ -236,7 +236,8 @@
     // قوائم الألوان الجديدة
     const colorLists = {
 
-"your-colors": [
+"your-colors": [ 
+             "#332b29", "#414143", "#1a2423",  "#2c1821", "#14171c", "#2b1720", "#1c1d22", "#171c32", "#262418", "#241a17", "#1d1d1f", "#121d1c",  "#1e0c14", "#0d1015", "#1d0d14", "#0f1015", "#0e1121", "#19170e","#fff",   
             "#14191c", "#17223e", "#1a2423", "#4e0e18", "#663b3d", "#17373e", "#2a2a28", "#2c1821", "#2d3b2e", "#787f69",
             "#3e2a3e", "#2a3d3e", "#35241c", "#371418", "#3b3b3d", "#2a3e32", "#3e2c2a", "#1c2b41", "#15386a", "#28311b",
             "#164555", "#4b6353", "#4d515d", "#50252c", "#37471f", "#38291e", "#867441", "#563a2c", "#1c3329", "#164b35",
