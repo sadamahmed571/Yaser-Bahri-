@@ -35,6 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. تفعيل نوافذ معاينة الصور
     initializePreviewModals();
+
+    // تحميل الإصدارات الافتراضية للنقشة 1
+    loadVersionsForDesign(1);
+
+    // ربط الـ select لتغيير النقشة
+    document.getElementById('main-design-number').addEventListener('change', (e) => {
+        const selectedDesignId = e.target.value;
+        loadVersionsForDesign(selectedDesignId);
+    });
 });
 
 // ==========================================================
@@ -198,7 +207,7 @@ function loadDesignData(designId) {
     
     // يتم تحميل البيانات في الإصدارات العشرة
     for (const version of VERSIONS) {
-        const fullVersion = `${designId}-${version}`; // يجب بناء مفتاح version-container
+        const fullVersion = `${designId}${version}`; // يجب بناء مفتاح version-container
         const colors = data[version];
         if (colors) {
              const versionContainer = document.querySelector(`.version-container[data-version="${fullVersion}"]`);
@@ -403,6 +412,7 @@ function initializePreviewModals() {
         const previewedImageSrc = document.getElementById('previewed-image').src;
         const designId = previewedImageSrc.split('/').pop().split('.jpg')[0]; // استخراج رقم النقشة من src مثل img/2.jpg -> 2
         loadVersionsForDesign(designId);
+        document.getElementById('main-design-number').value = designId;
         document.getElementById('image-preview-modal').style.display = 'none';
         document.getElementById('versions').scrollIntoView({ behavior: 'smooth' });
     });
@@ -500,7 +510,7 @@ function loadVersionsForDesign(designId) {
         viewButton.textContent = 'معاينة';
 
         const approveButton = document.createElement('button');
-        approveButton.className = 'approve-btn design-button2';
+        approveButton.className = 'approve-btn design-button';
         const approvedKey = `approved_${designId}_${i}`;
         const isApproved = localStorage.getItem(approvedKey) === 'true';
         approveButton.textContent = isApproved ? 'إلغاء الاعتماد' : 'اعتماد';
