@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختيار الوان النقشات</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
      <link rel="stylesheet" type="text/css" href="coloris.min.css">
     
@@ -14,6 +15,26 @@
 }
 .approve-version-btn:not(.approved) {
     background-color: red;
+}
+.navigation-arrows{
+    display: flex;
+	flex-direction: row;
+	 align-items: center;
+    justify-content: space-between;
+	padding-bottom:  10px;
+	padding-top:  10px;
+}
+.navigation-arrow{
+    display: block;
+	padding: 3px 10px;
+	 align-items: center;
+    justify-content: center;
+	text-align: center;
+	background:  #27ae60;
+	color:  #fff;
+	font-size:  15px;
+	border: none;
+	 border-radius: 5px;
 }
 </style>
 <body>
@@ -543,11 +564,11 @@
         <span class="close-preview">&times;</span>
         <div class="image-preview-content">
             <img id="version-previewed-image" src="" alt="معاينة الاصدار">
-            
+           
             <!-- أسهم التنقل -->
             <div class="navigation-arrows">
-                <button id="prev-version-btn">←</button>
-                <button id="next-version-btn">→</button>
+                <button class="navigation-arrow" id="prev-version-btn"><i class="fa fa-angle-double-right"></i></button>
+                <button class="navigation-arrow" id="next-version-btn"> <i class="fa fa-angle-double-left"></i></button>
             </div>
             
             <!-- زر ملاحظات بدل اعتماد -->
