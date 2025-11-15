@@ -443,14 +443,6 @@
                 
    
     
-    <!-- نافذة معاينة الصورة للقسم الثاني -->
-    <div id="version-preview-modal" class="image-preview-modal">
-        <span class="close-preview">&times;</span>
-        <div class="image-preview-content">
-            <img id="version-previewed-image" src="" alt="معاينة الاصدار">
-            <button class="design-button approve-version-btn" style="margin-top: 0;">اعتماد هذا الاصدار</button>
-        </div>
-    </div>
     
     <!-- نافذة تعديل الوان الاصدار المنفرد -->
     <div class="color-modal single-version-modal" id="single-version-modal">
@@ -546,7 +538,23 @@
             <!-- المحتوى هنا سيكون ديناميكياً عبر JS -->
         </div>
     </main>
- 
+  <!-- نافذة معاينة الإصدار المنبثقة (معدلة) -->
+    <div id="version-preview-modal" class="image-preview-modal">
+        <span class="close-preview">&times;</span>
+        <div class="image-preview-content">
+            <img id="version-previewed-image" src="" alt="معاينة الاصدار">
+            
+            <!-- أسهم التنقل -->
+            <div class="navigation-arrows">
+                <button id="prev-version-btn">←</button>
+                <button id="next-version-btn">→</button>
+            </div>
+            
+            <!-- زر ملاحظات بدل اعتماد -->
+            <button class="design-button notes-btn-modal" id="notes-btn-modal">ملاحظات</button>
+        </div>
+    </div>
+
 	
      <section class="backgrounds-section" id="backgrounds">
     <header>
